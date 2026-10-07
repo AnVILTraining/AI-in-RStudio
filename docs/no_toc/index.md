@@ -1,5 +1,5 @@
 ---
-title: "AnVIL Book Name"
+title: "AI in RStudio"
 date: "October 07, 2026"
 site: bookdown::bookdown_site
 documentclass: book
