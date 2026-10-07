@@ -7,7 +7,7 @@ bookdown::gitbook:
   includes:
     in_header:
     - GA_Script.html
-    - /__w/AnVIL_Template/AnVIL_Template/docs/no_toc/assets/links.html
+    - /__w/AI-in-RStudio/AI-in-RStudio/docs/no_toc/assets/links.html
     before_body: assets/AnVIL_style/big-image_anvil.html
     after_body: assets/AnVIL_style/footer.html
   highlight: tango
