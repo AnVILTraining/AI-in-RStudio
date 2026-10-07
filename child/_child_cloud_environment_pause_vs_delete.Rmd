@@ -1,0 +1,42 @@
+```{r, include = FALSE}
+if (!exists("AnVIL_module_settings")) {
+  AnVIL_module_settings <- list(
+    cloud_environment = "your cloud environment",
+    include_pd_details = FALSE
+    )
+}
+if (is.null(AnVIL_module_settings$cloud_environment)) {
+  AnVIL_module_settings$cloud_environment = "your cloud environment"
+}
+if (is.null(AnVIL_module_settings$include_pd_details)) {
+  AnVIL_module_settings$include_pd_details = FALSE
+}
+```
+
+Cloud computing costs are based on the amount of time you use the computing resources, so it's important to clean up after yourself when you're done, and not just leave the computers running.
+
+There are two ways to "shut down" `r AnVIL_module_settings$cloud_environment` on AnVIL:
+
+- **Pause** the environment: This will save a copy of your work, and then release the computers for other people to use them.  **Do this if you plan to continue working in `r AnVIL_module_settings$cloud_environment`**.
+    - It's similar to turning off your computer or phone - when you start it back up, everything will be where you left it.
+    - This still costs a small amount of money, but much less than leaving the computer running.  
+- **Delete** the environment: This will delete everything and then release the computers for other people to use them.  **Do this if you are completely finished working**, or if your future work will be in a new environment.
+    - It's similar to throwing your computer or phone in the trash!
+    - **You will not be able to recover your work.**
+    - Make sure you have saved anything you need to another location (such as the Workspace bucket, GitHub, or your local machine) before you delete your environment.
+
+`r if(AnVIL_module_settings$include_pd_details) {"
+:::{.notice}
+You can also **delete the environment but keep the Persistent Disk** (this is like keeping the hard drive while throwing away the rest of the computer). However in practice this is rarely preferable. You will continue to be charged for the Persistent Disk, and the **Persistent Disk is both more expensive and less stable than your Workspace bucket**. Anything that you want to keep long-term should be moved to your Workspace bucket.
+
+Some examples of when you might want to delete the environment but keep the persistent disk:
+
+- You need to make certain types of changes to the cloud environment, which require you to delete and then recreate the environment. The PD allows you to safely delete your old environment and then attach the PD to the new environment, preserving your files.
+- You will not be using the cloud environment for a while **AND** it would be difficult to recreate the contents of the disk. Sometimes there may be files (such as intermediate results or complicated package installations) that don't need to be preserved long-term, but would be inconvenient to replace. The Persistent Disk can be used to keep those files around until you are ready to return to them, without incurring the cost of maintaining a paused cloud environment. Just keep in mind that (1) there is still a cost for the PD itself, which depends on the size of the PD, and (2) the PD is not backed up, so the files may be lost if something goes wrong with your cloud environment or PD.
+:::
+"}`
+
+```{r, include = FALSE}
+AnVIL_module_settings <<- NULL
+```
+

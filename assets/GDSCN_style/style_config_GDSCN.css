@@ -1,0 +1,12 @@
+/*
+any variables listed in style_config_default.css can be overridden by giving them a new value in this file
+- add additional variable on new lines inside the :root element
+- don't forget the semicolon at the end of the line
+*/
+
+:root {
+  --link-color: #37632c;
+  --accent-color: #37632c;   /* book title, first letter of chapter, toc text */
+  --highlight-color: #4D8240;   /* toc highlight, callout box borders */
+  }
+

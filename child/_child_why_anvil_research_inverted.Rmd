@@ -1,0 +1,3 @@
+# Research Benefit: Data and analysis methods in one place
+
+AnVIL is a unified computing environment for data storage, management, and analysis. The [AnVIL portal](https://anvilproject.org) serves as an entry point to access all parts of the AnVIL system as well as training materials and announcements. 
