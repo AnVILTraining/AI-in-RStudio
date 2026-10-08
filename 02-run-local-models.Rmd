@@ -88,7 +88,7 @@ ollama/bin/ollama pull qwen3-coder:30b
 
 3. Do a test prompt and wait for the response.
 
-```{r}
+```{bash, eval=FALSE}
 ollama/bin/ollama run qwen3-coder:30b "Say hi"
 ```
 
@@ -100,7 +100,7 @@ ollama/bin/ollama run qwen3-coder:30b "Say hi"
 
 4. Check if GPU is active:
 
-```{r}
+```{bash, eval=FALSE}
 ollama/bin/ollama ps
 ```
 
