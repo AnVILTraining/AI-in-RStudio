@@ -54,7 +54,7 @@ ottrpal::include_slide("https://docs.google.com/presentation/d/1zrqf2fLtglxi5l1q
 
 Run the following code in the R Console:
 
-```{r}
+```{r, eval=FALSE}
 # AI integration packages
 install.packages("ellmer")
 library(ellmer)
