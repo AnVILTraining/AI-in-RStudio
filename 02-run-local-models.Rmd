@@ -56,7 +56,7 @@ Run the following code in the R Console:
 
 ```{r}
 # AI integration packages
-install.packages("ellmer”)
+install.packages("ellmer")
 library(ellmer)
 ```
 
