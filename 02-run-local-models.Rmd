@@ -170,7 +170,7 @@ Correct Answer: C (Because the ~19 GB model exceeds the Tesla T4's 16 GB VRAM ca
 >
 > D. To execute the server commands directly inside the R Console without throwing an error.
 
-Correct Answer: A (nohup (no hangup) combined with the trailing ‘&’ allows the process to continue running in the background after the terminal session closes, preventing the process from terminating when you close your terminal window.)
+Correct Answer: A (nohup (no hangup) combined with the trailing & allows the process to continue running in the background after the terminal session closes, preventing the process from terminating when you close your terminal window.)
 
 4.  **If a user’s network connection drops halfway through downloading the 19 GB qwen3-coder:30b model, what happens when they rerun the pull command?**
 
@@ -180,11 +180,11 @@ Correct Answer: A (nohup (no hangup) combined with the trailing ‘&’ allows t
 >
 > C. Ollama automatically falls back to downloading the smaller llama3.1 model instead.
 >
-> D. The download switches from the .tar.zst archive format to a standard .tgz archive to save bandwidth.
+> D. The model gets corrupted, forcing the user to manually purge the cache using `ollama clean` before retrying.
 
 Correct Answer: B (Ollama's pull command supports resumable downloads, saving users time and frustration if an interruption occurs during large model transfers.)
 
-5. **In the command `nohup ollama/bin/ollama serve > ollama.log 2>&1 &`, what is the role of the ‘serve’ argument passed to the Ollama?**
+5. **In the command `nohup ollama/bin/ollama serve`, what is the role of the `serve` argument passed to the Ollama?**
 
 > A. It forces termination of active background sessions.
 >
@@ -194,5 +194,5 @@ Correct Answer: B (Ollama's pull command supports resumable downloads, saving us
 >
 > D. It downloads and installs the latest binary updates.
 
-Correct Answer: B (Passing the ‘serve’ argument tells the Ollama executable to start up as an active API server ready to handle requests.)
+Correct Answer: B (Passing the `serve` argument tells the Ollama executable to start up as an active API server ready to handle requests.)
 
