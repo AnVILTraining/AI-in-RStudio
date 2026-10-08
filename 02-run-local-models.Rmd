@@ -118,7 +118,7 @@ qwen3-coder:30b    06c1097efce0    19 GB    25%/75% CPU/GPU    4096       About 
 1. Switch back to the **R Console**. From here on, everything is R Console.
 2. Connect R to your local AI server by running this code in R Console
 
-```{r}
+```{r, eval=FALSE}
 chat <- chat_ollama(
   base_url = Sys.getenv("ollama/bin/ollama", "http://localhost:11434"),
   model = "qwen3-coder:30b",
@@ -130,7 +130,7 @@ chat <- chat_ollama(
 
 3. Test the connection by ask AI a question
 
-```{r}
+```{r, eval=FALSE}
 chat$chat("Tell me one short fact about human genome")
 ```
 
