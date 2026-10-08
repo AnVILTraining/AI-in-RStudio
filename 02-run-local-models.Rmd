@@ -4,7 +4,7 @@ ottrpal::set_knitr_image_path()
 
 # Run Local Models
 
-*Running Local AI Models with RStudio and Ollama
+Running Local AI Models with RStudio and Ollama
 
 ## Learning Objectives
 
@@ -40,32 +40,23 @@ ottrpal::include_slide("https://docs.google.com/presentation/d/1zrqf2fLtglxi5l1q
 5. Read and review the estimated hourly running cost displayed in the dialog.
 6. Scroll down and click **CREATE**.
 
-> [!NOTE]
-> The GPU type and the configuration options above are what AnVIL offered when this document was written. Available GPU types and configurations may change as GPU options on AnVIL evolve. 
-> The basic recommendation is to enable the smallest GPU option that comfortably holds your LLM model.
+::: {.notice}
+- The GPU type and the configuration options above are what AnVIL offered when this document was written. Available GPU types and configurations may change as GPU options on AnVIL evolve. 
+- The basic recommendation is to enable the smallest GPU option that comfortably holds your LLM model.
+:::
 
 ### Launch RStudio
 
 1. When your environment is ready, its status will change to **green** (Running).
 1. Click the **RStudio** icon, then **Open**. RStudio will open in a new browser tab.
 
-
-###  Install and load required packages
-
-Run the following code in the R Console:
-
-```{r, eval=FALSE}
-# AI integration packages
-install.packages("ellmer")
-library(ellmer)
-```
-
 ### Install Ollama server and download the model
 
 1. In RStudio, click the **Terminal** tab next to the Console tab.
 
-> [!IMPORTANT]
-> All commands in this section must be executed in the **Terminal** (not inside R Console). 
+::: {.warning}
+All commands in this section must be executed in the **Terminal** (not inside R Console). 
+:::
 
 2. Install the server and pull the model by running this code in the **Terminal**.
 
@@ -81,10 +72,11 @@ nohup ollama/bin/ollama serve > ollama.log 2>&1 &
 ollama/bin/ollama pull qwen3-coder:30b
 ```
 
-> [!NOTE]
-> Ollama may unload the model from memory after 5 or more minutes of inactivity.\ 
-> To keep the model in memory you can set the environment variable `OLLAMA_KEEP_ALIVE=-1`. \
-> If you don’t keep Ollama ‘alive’, after inactivity, you may need to pull the model again in the Terminal like so: `ollama/bin/ollama pull qwen3-coder:30b`.
+::: {.warning}
+- Ollama may unload the model from memory after 5 or more minutes of inactivity.\ 
+- To keep the model in memory you can set the environment variable `OLLAMA_KEEP_ALIVE=-1`. \
+- If you don’t keep Ollama ‘alive’, after inactivity, you may need to pull the model again in the Terminal like so: `ollama/bin/ollama pull qwen3-coder:30b`.
+:::
 
 3. Do a test prompt and wait for the response.
 
@@ -92,11 +84,13 @@ ollama/bin/ollama pull qwen3-coder:30b
 ollama/bin/ollama run qwen3-coder:30b "Say hi"
 ```
 
-> [!NOTE]
-> Note, this first response may take more than a minute (subsequent responses will be faster). You can check by running the same test prompt a second time and noting the increase in the speed of the response.
+::: {.warning}
+- The first response may take more than a minute (subsequent responses will be faster). You can check by running the same test prompt a second time and noting the increase in the speed of the response.
 
-> [!TIP]
-> If the first prompt response is taking too long, CANCEL the command (Command + C on Mac), and then re-run the command. This will typically fix the response hold-up.
+**TIP**
+
+- If the first prompt response is taking too long, CANCEL the command (Command + C on Mac), and then re-run the command. This will typically fix the response hold-up.
+:::
 
 4. Check if GPU is active:
 
@@ -104,7 +98,7 @@ ollama/bin/ollama run qwen3-coder:30b "Say hi"
 ollama/bin/ollama ps
 ```
 
-Example terminal output
+Example terminal output:
 ```
 NAME              	 ID             	 SIZE     PROCESSOR          CONTEXT    UNTIL                   
 qwen3-coder:30b    06c1097efce0    19 GB    25%/75% CPU/GPU    4096       About a minute from now 
@@ -112,8 +106,9 @@ qwen3-coder:30b    06c1097efce0    19 GB    25%/75% CPU/GPU    4096       About 
 
 ### Point R at the local AI server
 
-> [!IMPORTANT]
-> All commands in this section must be executed in the R Console (not inside Terminal). 
+::: {.important}
+All commands in this section must be executed in the R Console (not inside Terminal). 
+:::
 
 1. Switch back to the **R Console**. From here on, everything is R Console.
 2. Connect R to your local AI server by running this code in R Console
@@ -125,8 +120,11 @@ chat <- chat_ollama(
 )
 ```
 
-> [!NOTE]
-> Notice how you didn’t need to specifically evoke ellmer via `ellmer::chat_ollama()`? This is because you had already loaded the package into your session using library(ellmer), which makes its functions directly available in your current environment. Alternatively, you could code explicitly: ``chat <- ellmer::chat_ollama(...)`.
+::: {.notice}
+Notice how you didn’t need to specifically evoke ellmer via `ellmer::chat_ollama()`? 
+This is because you had already loaded the package into your session using library(ellmer), which makes its functions directly available in your current environment. 
+Alternatively, you could code explicitly: ``chat <- ellmer::chat_ollama(...)`.
+:::
 
 3. Test the connection by ask AI a question
 
