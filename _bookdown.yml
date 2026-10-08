@@ -4,8 +4,8 @@ repo: https://github.com/jhudsl/AnVIL_Template/
 rmd_files: ["index.Rmd",
             "01-intro.Rmd",
             "02-run-local-models.Rmd",
-            "03-AnVIL_modules.Rmd",
-            "04-workspace_modules.Rmd",
+            "03-explore-gander.Rmd",
+            "04-run-deseq2.Rmd",
             "About.Rmd",
             "References.Rmd"]
 new_session: yes
