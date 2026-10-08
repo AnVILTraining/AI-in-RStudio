@@ -62,14 +62,14 @@ library(ellmer)
 
 ### Install Ollama server and download the model
 
-1. In RStudio, click the Terminal tab next to the Console tab.
+1. In RStudio, click the **Terminal** tab next to the Console tab.
 
 > [!IMPORTANT]
 > All commands in this section must be executed in the **Terminal** (not inside R Console). 
 
-2. Install the server and pull the model by running this code in the Terminal.
+2. Install the server and pull the model by running this code in the **Terminal**.
 
-```{r}
+```{bash, eval=FALSE}
 # 1. Download the local Ollama server into a folder
 mkdir ollama
 curl -fsSL https://ollama.com/download/ollama-linux-amd64.tar.zst | tar x --zstd -C ollama
