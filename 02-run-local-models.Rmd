@@ -32,7 +32,8 @@ Before you can interact with local AI models, you must provision a cloud-based R
 | GPU type          | NVIDIA Tesla T4         |
 | Number of GPUs    | 1                       |
 
-```{r, fig.align='center', echo = FALSE, fig.alt= "Don't forget the GPU!"}
+
+```{r, fig.align='center', out.width="100%", echo = FALSE, fig.alt= "Don't forget the GPU!"}
 ottrpal::include_slide("https://docs.google.com/presentation/d/1zrqf2fLtglxi5l1qx5GCaRlDkKR8ZFp-ldmlqtqWGZg/edit?slide=id.h28e29b86668bd2c9_0_0#slide=id.h28e29b86668bd2c9_0_0")
 ```
 
@@ -81,9 +82,9 @@ ollama/bin/ollama pull qwen3-coder:30b
 ```
 
 > [!NOTE]
-> By default, Ollama unloads the model from memory after 5 minutes of inactivity.\ 
-> Keep the model in memory: You can force it to stay permanently in VRAM by setting the environment variable `OLLAMA_KEEP_ALIVE=-1`. \
-> If you don’t keep Ollama ‘alive’, after inactivity, you will need to pull the model again in the Terminal like so: `ollama/bin/ollama pull qwen3-coder:30b`.
+> Ollama may unload the model from memory after 5 or more minutes of inactivity.\ 
+> To keep the model in memory you can set the environment variable `OLLAMA_KEEP_ALIVE=-1`. \
+> If you don’t keep Ollama ‘alive’, after inactivity, you may need to pull the model again in the Terminal like so: `ollama/bin/ollama pull qwen3-coder:30b`.
 
 3. Do a test prompt and wait for the response.
 
