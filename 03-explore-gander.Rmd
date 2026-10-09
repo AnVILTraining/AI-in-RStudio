@@ -1,2 +1,76 @@
+```{r, include = FALSE}
+ottrpal::set_knitr_image_path()
+```
+
 # Explore data with gander
+
+Simplifying your data exploration with Local AI, gander and Tidyverse in RStudio
+
+
+## Learning Objectives
+
+1. Configure gander package with a local AI model and create a keyboard shortcut in RStudio
+1. Import genomics datasets from Google Cloud Storage into your AnVIL workspace and load onto RStudio
+1. Explore the count matrix and sample metadata with gander and tidyverse
+
+## Configure gander
+
+::: {.warning}
+All commands in this section must be executed in the **R Console** (not inside Terminal). 
+:::
+
+###  Install and load required packages
+
+Run the following code in the R Console
+
+```{r, eval=FALSE}
+# AI integration packages
+install.packages("gander")
+library(gander)
+```
+
+### Configure gander's chat model
+
+To connect the gander package to your local Ollama server running the AI model, set the default option to your chat connection:
+
+```{r, eval=FALSE}
+options(gander.chat = chat)
+```
+
+### Setup keyboard shortcut for gander
+
+Setting a keyboard shortcut allows you to invoke gander instantly inside your code editor without manually typing console commands.
+
+Create a gander shortcut:
+1. In **RStudio**: Navigate to Tools → Modify Keyboard Shortcuts…
+2. Search for “gander” 
+3. Assign a convenient shortcut, Shift+Cmd+g (macOS)
+
+### Test gander shortcut
+
+Your RStudio session now has an AI research partner that lives on your AnVIL instance. Let's put it to work. 
+Instead of jumping back and forth to an external browser chat window, gander reads your active code context and environment variables directly inside the IDE.
+
+:::important
+**How to use gander shortcut**:
+In a clean R Script: \
+  1. **Highlight** - an object to query (or word, a sentence, code or an empty space) \ 
+  2. **Evoke gander** - using your pre-set shortcut *Shift+Cmd+g* \
+  3. **Enter a prompt** - a short, concrete instruction of what you want to do in plain language \
+  4. **Review the output**  -  e.g. output code before running the generated code
+:::
+
+1. Ask AI a question via gander shortcut. 
+
+In a clean R Script:  
+
+> Highlight: `options(gander.chat = chat)`
+>
+> Evoke gander shortcut: Shift+Cmd+g
+> 
+> Enter text prompt: “Briefly explain this code for me”
+
+```{r, fig.align='center', out.width="100%", echo = FALSE, fig.alt= "Don't forget the GPU!"}
+ottrpal::include_slide("https://docs.google.com/presentation/d/1zrqf2fLtglxi5l1qx5GCaRlDkKR8ZFp-ldmlqtqWGZg/edit?slide=id.h324ef5e179219b9e_0_10#slide=id.h324ef5e179219b9e_0_10")
+```
 
