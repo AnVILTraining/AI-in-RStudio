@@ -1,5 +1,3 @@
-# (PART\*) Demo Chapters {-}
-
 
 
 

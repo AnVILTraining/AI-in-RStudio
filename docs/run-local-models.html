@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 2 Run Local Models | AI in RStudio</title>
+  <meta name="description" content="Description about Course/Book." />
+  <meta name="generator" content="bookdown 0.46 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 2 Run Local Models | AI in RStudio" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Description about Course/Book." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 Run Local Models | AI in RStudio" />
+  
+  <meta name="twitter:description" content="Description about Course/Book." />
+  
+
+
+
+<meta name="date" content="2026-10-09" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  <link rel="shortcut icon" href="assets/AnVIL_style/anvil_favicon.ico" type="image/x-icon" />
+<link rel="prev" href="introduction.html"/>
+<link rel="next" href="explore-data-with-gander.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+  
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id={MeasurementID}"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '{MeasurementID}');
+</script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #204a87; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #8f5902; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #204a87; font-weight: bold; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #ce5c00; font-weight: bold; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="assets/style_config_default.css" type="text/css" />
+<link rel="stylesheet" href="assets/AnVIL_style/style_config_AnVIL.css" type="text/css" />
+<link rel="stylesheet" href="assets/style.css" type="text/css" />
+<link rel="stylesheet" href="assets/AnVIL_Template/AnVIL_Template.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<a href="https://anvilproject.org/" target="_blank"><img src="assets/AnVIL_style/logo-anvil.png" style="width: 80%; padding-left: 15px; padding-top: 8px;"</a>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>About this Book</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#skills-level"><i class="fa fa-check"></i>Skills Level</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#anvil-collection"><i class="fa fa-check"></i>AnVIL Collection</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="learning-objectives.html"><a href="learning-objectives.html"><i class="fa fa-check"></i>Learning Objectives</a></li>
+<li class="chapter" data-level="" data-path="table-of-contents.html"><a href="table-of-contents.html"><i class="fa fa-check"></i>Table of Contents</a></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#motivation"><i class="fa fa-check"></i><b>1.1</b> Motivation</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#target-audience"><i class="fa fa-check"></i><b>1.2</b> Target Audience</a></li>
+<li class="chapter" data-level="1.3" data-path="introduction.html"><a href="introduction.html#curriculum"><i class="fa fa-check"></i><b>1.3</b> Curriculum</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="run-local-models.html"><a href="run-local-models.html"><i class="fa fa-check"></i><b>2</b> Run Local Models</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="run-local-models.html"><a href="run-local-models.html#learning-objectives-1"><i class="fa fa-check"></i><b>2.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="2.2" data-path="run-local-models.html"><a href="run-local-models.html#rstudio-setup-with-gpu-on-anvil"><i class="fa fa-check"></i><b>2.2</b> RStudio Setup with GPU on AnVIL</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="run-local-models.html"><a href="run-local-models.html#open-the-workspace-and-configure-compute-settings"><i class="fa fa-check"></i><b>2.2.1</b> Open the workspace and configure compute settings</a></li>
+<li class="chapter" data-level="2.2.2" data-path="run-local-models.html"><a href="run-local-models.html#launch-rstudio"><i class="fa fa-check"></i><b>2.2.2</b> Launch RStudio</a></li>
+<li class="chapter" data-level="2.2.3" data-path="run-local-models.html"><a href="run-local-models.html#install-ollama-server-and-download-the-model"><i class="fa fa-check"></i><b>2.2.3</b> Install Ollama server and download the model</a></li>
+<li class="chapter" data-level="2.2.4" data-path="run-local-models.html"><a href="run-local-models.html#connect-r-to-the-local-ai-server"><i class="fa fa-check"></i><b>2.2.4</b> Connect R to the local AI server</a></li>
+<li class="chapter" data-level="2.2.5" data-path="run-local-models.html"><a href="run-local-models.html#quiz"><i class="fa fa-check"></i><b>2.2.5</b> Quiz</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="explore-data-with-gander.html"><a href="explore-data-with-gander.html"><i class="fa fa-check"></i><b>3</b> Explore data with gander</a></li>
+<li class="chapter" data-level="4" data-path="run-deseq2.html"><a href="run-deseq2.html"><i class="fa fa-check"></i><b>4</b> Run DESeq2</a></li>
+<li class="chapter" data-level="" data-path="about-the-authors.html"><a href="about-the-authors.html"><i class="fa fa-check"></i>About the Authors</a></li>
+<li class="chapter" data-level="5" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>5</b> References</a></li>
+<li class="divider"></li>
+<p style="text-align:center;"> <a href="https://github.com/jhudsl/OTTR_Template" target="blank" > This content was published with</a> <a href="https://bookdown.org/" target="blank"> bookdown by: </a> </p>
+<p style="text-align:center;"> <a href="https://hutchdatascience.org/"> The Fred Hutch Data Science Lab </a></p>
+<a href="https://hutchdatascience.org/" target="_blank"><img src="https://raw.githubusercontent.com/jhudsl/OTTR_Template/main/style-sets/fhdasl/copy_to_assets/big-dasl-stacked.png" style="width: 80%; padding-left: 34px; padding-top: 8px;"</a>
+<p style="text-align:center; font-size: 12px;"> <a href="https://github.com/rstudio4edu/rstudio4edu-book/"> Style adapted from: rstudio4edu-book </a> <a href ="https://creativecommons.org/licenses/by/2.0/"> (CC-BY 2.0) </a></p>
+<p style="padding-left: 40px;"><div class="trapezoid" style = "padding-left: 40px;"><span><a href="https://docs.google.com/forms/d/e/1FAIpQLScrDVb_utm55pmb_SHx-RgELTEbCCWdLea0T3IzS0Oj00GE4w/viewform?usp=pp_url&entry.1565230805=AI+in+RStudio"> Click here to provide feedback</a> <img src="assets/itcr_arrow.png" style=" width: 10%" ></span></div></p>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">AI in RStudio</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<head>
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=10.0,initial-scale=1.0">
+  <!--script src="https://kit.fontawesome.com/6a26f47516.js"></script-->
+  <!--<script src="assets/hideOutput.js"></script>-->
+</head>
+        
+
+
+<div class="hero-image-container"> 
+  <img class= "hero-image" src="assets/AnVIL_style/dasl_thin_main_image.png">
+</div>
+<div id="run-local-models" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">Chapter 2</span> Run Local Models<a href="run-local-models.html#run-local-models" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Running Local AI Models with RStudio and Ollama</p>
+<div id="learning-objectives-1" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> Learning Objectives<a href="run-local-models.html#learning-objectives-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ol style="list-style-type: decimal">
+<li>Provision infrastructure: Configure and launch a GPU-accelerated RStudio environment on AnVIL.</li>
+<li>Deploy local AI: Install and run an Ollama server locally, and download <code>qwen3-coder</code> model.</li>
+<li>Integrate with R: Connect R to the local AI server via ellmer.</li>
+</ol>
+</div>
+<div id="rstudio-setup-with-gpu-on-anvil" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> RStudio Setup with GPU on AnVIL<a href="run-local-models.html#rstudio-setup-with-gpu-on-anvil" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Before you can interact with local AI models, you must provision a cloud-based RStudio environment on AnVIL equipped with adequate hardware.</p>
+<div id="open-the-workspace-and-configure-compute-settings" class="section level3 hasAnchor" number="2.2.1">
+<h3><span class="header-section-number">2.2.1</span> Open the workspace and configure compute settings<a href="run-local-models.html#open-the-workspace-and-configure-compute-settings" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li>In AnVIL, navigate to your workspace.</li>
+<li>Click on the cloud icon on the far right to view <strong>Cloud Environment</strong> options.</li>
+<li>In the dialog box, under <strong>RStudio</strong>, click <strong>Settings</strong>.</li>
+<li>Configure:</li>
+</ol>
+<table>
+<thead>
+<tr class="header">
+<th>Parameter</th>
+<th>Selection</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Application</td>
+<td>RStudio</td>
+</tr>
+<tr class="even">
+<td>CPUs</td>
+<td>8</td>
+</tr>
+<tr class="odd">
+<td>Memory</td>
+<td>52 GB</td>
+</tr>
+<tr class="even">
+<td>GPU configuration</td>
+<td>Enable GPUs (toggle ON)</td>
+</tr>
+<tr class="odd">
+<td>GPU type</td>
+<td>NVIDIA Tesla T4</td>
+</tr>
+<tr class="even">
+<td>Number of GPUs</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p><img src="02-run-local-models_files/figure-html/1zrqf2fLtglxi5l1qx5GCaRlDkKR8ZFp-ldmlqtqWGZg_h28e29b86668bd2c9_0_0.png" alt="Don't forget the GPU!" width="100%" style="display: block; margin: auto;" /></p>
+<ol start="5" style="list-style-type: decimal">
+<li>Read and review the estimated hourly running cost displayed in the dialog.</li>
+<li>Scroll down and click <strong>CREATE</strong>.</li>
+</ol>
+<div class="notice">
+<ul>
+<li>The GPU type and the configuration options above are what AnVIL offered when this document was written. Available GPU types and configurations may change as GPU options on AnVIL evolve.</li>
+<li>The basic recommendation is to enable the smallest GPU option that comfortably holds your LLM model.</li>
+</ul>
+</div>
+</div>
+<div id="launch-rstudio" class="section level3 hasAnchor" number="2.2.2">
+<h3><span class="header-section-number">2.2.2</span> Launch RStudio<a href="run-local-models.html#launch-rstudio" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li>When your environment is ready, its status will change to <strong>green</strong> (Running).</li>
+<li>Click the <strong>RStudio</strong> icon, then <strong>Open</strong>. RStudio will open in a new browser tab.</li>
+</ol>
+</div>
+<div id="install-ollama-server-and-download-the-model" class="section level3 hasAnchor" number="2.2.3">
+<h3><span class="header-section-number">2.2.3</span> Install Ollama server and download the model<a href="run-local-models.html#install-ollama-server-and-download-the-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li>In RStudio, click the <strong>Terminal</strong> tab next to the Console tab.</li>
+</ol>
+<div class="warning">
+<p>All commands in this section must be executed in the <strong>Terminal</strong> (not inside R Console).</p>
+</div>
+<ol start="2" style="list-style-type: decimal">
+<li>Install the server and pull the model by running this code in the <strong>Terminal</strong>.</li>
+</ol>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="run-local-models.html#cb1-1" tabindex="-1"></a><span class="co"># 1. Download the local Ollama server into a folder</span></span>
+<span id="cb1-2"><a href="run-local-models.html#cb1-2" tabindex="-1"></a><span class="fu">mkdir</span> ollama</span>
+<span id="cb1-3"><a href="run-local-models.html#cb1-3" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-fsSL</span> https://ollama.com/download/ollama-linux-amd64.tar.zst <span class="kw">|</span> <span class="fu">tar</span> x <span class="at">--zstd</span> <span class="at">-C</span> ollama</span>
+<span id="cb1-4"><a href="run-local-models.html#cb1-4" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="run-local-models.html#cb1-5" tabindex="-1"></a><span class="co"># 2. Launch the server in the background, logging to a file </span></span>
+<span id="cb1-6"><a href="run-local-models.html#cb1-6" tabindex="-1"></a><span class="fu">nohup</span> ollama/bin/ollama serve <span class="op">&gt;</span> ollama.log <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span> <span class="kw">&amp;</span></span>
+<span id="cb1-7"><a href="run-local-models.html#cb1-7" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="run-local-models.html#cb1-8" tabindex="-1"></a><span class="co"># 3. Pull (download) the model</span></span>
+<span id="cb1-9"><a href="run-local-models.html#cb1-9" tabindex="-1"></a><span class="ex">ollama/bin/ollama</span> pull qwen3-coder:30b</span></code></pre></div>
+<div class="notice">
+<ul>
+<li>Ollama may unload the model from memory after 5 or more minutes of inactivity. </li>
+<li>To keep the model in memory you can set the environment variable <code>OLLAMA_KEEP_ALIVE=-1</code>.<br />
+</li>
+<li>If you don’t keep Ollama ‘alive’, after inactivity, you may need to pull the model again in the Terminal like so: <code>ollama/bin/ollama pull qwen3-coder:30b</code>.</li>
+</ul>
+</div>
+<ol start="3" style="list-style-type: decimal">
+<li>Do a test prompt and wait for the response.</li>
+</ol>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="run-local-models.html#cb2-1" tabindex="-1"></a><span class="ex">ollama/bin/ollama</span> run qwen3-coder:30b <span class="st">&quot;Say hi&quot;</span></span></code></pre></div>
+<div class="notice">
+<p><strong>NOTE</strong>
+- The first response may take more than a minute (subsequent responses will be faster). You can check by running the same test prompt a second time and noting the increase in the speed of the response.</p>
+<p><strong>TIP</strong>
+- If the first prompt response is taking too long, CANCEL the command (Command + C on Mac), and then re-run the command. This will typically fix the response hold-up.</p>
+</div>
+<ol start="4" style="list-style-type: decimal">
+<li>Check if GPU is active:</li>
+</ol>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="run-local-models.html#cb3-1" tabindex="-1"></a><span class="ex">ollama/bin/ollama</span> ps</span></code></pre></div>
+<p>Example terminal output:</p>
+<pre><code>NAME                 ID                  SIZE     PROCESSOR          CONTEXT    UNTIL                   
+qwen3-coder:30b    06c1097efce0    19 GB    25%/75% CPU/GPU    4096       About a minute from now </code></pre>
+</div>
+<div id="connect-r-to-the-local-ai-server" class="section level3 hasAnchor" number="2.2.4">
+<h3><span class="header-section-number">2.2.4</span> Connect R to the local AI server<a href="run-local-models.html#connect-r-to-the-local-ai-server" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="warning">
+<p>All commands in this section must be executed in the <strong>R Console</strong> (not inside Terminal).</p>
+</div>
+<ol style="list-style-type: decimal">
+<li>Install and load required packages by running the following code in the R Console:</li>
+</ol>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="run-local-models.html#cb5-1" tabindex="-1"></a><span class="co"># AI integration packages</span></span>
+<span id="cb5-2"><a href="run-local-models.html#cb5-2" tabindex="-1"></a><span class="fu">install.packages</span>( <span class="st">&quot;ellmer&quot;</span>)</span>
+<span id="cb5-3"><a href="run-local-models.html#cb5-3" tabindex="-1"></a><span class="fu">library</span>(ellmer)</span></code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li>Connect R to your local AI server by running the following code in the R Console:</li>
+</ol>
+<p><code>ellmer</code> provides the R functions that let you connect to and communicate with your local AI server from R.
+Make sure you have installed and loaded <code>ellmer</code> before continuing.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="run-local-models.html#cb6-1" tabindex="-1"></a>chat <span class="ot">&lt;-</span> <span class="fu">chat_ollama</span>(</span>
+<span id="cb6-2"><a href="run-local-models.html#cb6-2" tabindex="-1"></a>  <span class="at">base_url =</span> <span class="fu">Sys.getenv</span>(<span class="st">&quot;ollama/bin/ollama&quot;</span>, <span class="st">&quot;http://localhost:11434&quot;</span>),</span>
+<span id="cb6-3"><a href="run-local-models.html#cb6-3" tabindex="-1"></a>  <span class="at">model =</span> <span class="st">&quot;qwen3-coder:30b&quot;</span>,</span>
+<span id="cb6-4"><a href="run-local-models.html#cb6-4" tabindex="-1"></a>)</span></code></pre></div>
+<div class="notice">
+<p>Notice how you didn’t need to specifically evoke ellmer via <code>ellmer::chat_ollama()</code>?
+This is because you had already loaded the package into your session using library(ellmer), which makes its functions directly available in your current environment.
+Alternatively, you could code explicitly: `<code>chat &lt;- ellmer::chat_ollama(...)</code>.</p>
+</div>
+<ol start="3" style="list-style-type: decimal">
+<li>Test the connection by asking AI a question</li>
+</ol>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="run-local-models.html#cb7-1" tabindex="-1"></a>chat<span class="sc">$</span><span class="fu">chat</span>(<span class="st">&quot;Tell me one short fact about human genome&quot;</span>)</span></code></pre></div>
+</div>
+<div id="quiz" class="section level3 hasAnchor" number="2.2.5">
+<h3><span class="header-section-number">2.2.5</span> Quiz<a href="run-local-models.html#quiz" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li><strong>Ask AI a question using <code>chat$chat</code> and paste question and answer below?</strong></li>
+</ol>
+<blockquote>
+<p>Question:</p>
+<p>Answer:</p>
+</blockquote>
+<ol start="2" style="list-style-type: decimal">
+<li><strong>Why does enabling a GPU matter for this workshop?</strong></li>
+</ol>
+<blockquote>
+<p>A. DESeq2 requires a GPU.</p>
+<p>B. The large language model (LLM) is hosted locally and runs much faster on a GPU.</p>
+<p>C. It speeds up the cloud storage data transfer during the bucket copy process.</p>
+<p>D. It is required by AnVIL on RStudio.</p>
+</blockquote>
+<p>Correct Answer: B (The LLM is hosted locally and generates responses much faster on a GPU.)</p>
+<ol start="3" style="list-style-type: decimal">
+<li><strong>You provision an RStudio instance with 8 CPUs, 52 GB of system memory, and 1 NVIDIA Tesla T4 GPU (16 GB VRAM). You plan to load a 19 GB model (e.g. qwen3-coder). What will happen when you load the model?</strong></li>
+</ol>
+<blockquote>
+<p>A. The model will fit entirely within the 16 GB VRAM of the Tesla T4 GPU.</p>
+<p>B. The model will fail to load completely because it exceeds the total system memory of 52 GB.</p>
+<p>C. The application will automatically split the model layers between the GPU and the CPU system memory, allowing it to run successfully despite being slower than a fully resident model.</p>
+<p>D. The environment will automatically upgrade your hardware to a larger GPU to accommodate the full 19 GB model in VRAM.</p>
+</blockquote>
+<p>Correct Answer: C (Because the ~19 GB model exceeds the Tesla T4’s 16 GB VRAM capacity, the model cannot fit entirely on the graphics card and automatically offloads the remaining layers to the CPU, allowing the model to run successfully even though it will be slower than a fully GPU-resident model.)</p>
+<ol start="4" style="list-style-type: decimal">
+<li><strong>What is the primary purpose of running the “nohup” command?</strong></li>
+</ol>
+<blockquote>
+<p>A. To run the Ollama server in the background, keeping it alive even if the terminal session ends or the tab is closed, while redirecting output to a log file.</p>
+<p>B. To automatically update the server to the latest version and pin the release for workshop reproducibility.</p>
+<p>C. To force the 19 GB model download to run concurrently with the server startup.</p>
+<p>D. To execute the server commands directly inside the R Console without throwing an error.</p>
+</blockquote>
+<p>Correct Answer: A (nohup (no hangup) combined with the trailing &amp; allows the process to continue running in the background after the terminal session closes, preventing the process from terminating when you close your terminal window.)</p>
+<ol start="5" style="list-style-type: decimal">
+<li><strong>If a user’s network connection drops halfway through downloading the 19 GB qwen3-coder:30b model, what happens when they rerun the pull command?</strong></li>
+</ol>
+<blockquote>
+<p>A. The download fails permanently, requiring them to delete the ollama directory and start from scratch.</p>
+<p>B. The ollama pull command is resumable, meaning the download picks up where it left off rather than starting over from 0%.</p>
+<p>C. Ollama automatically falls back to downloading the smaller llama3.1 model instead.</p>
+<p>D. The model gets corrupted, forcing the user to manually purge the cache using <code>ollama clean</code> before retrying.</p>
+</blockquote>
+<p>Correct Answer: B (Ollama’s pull command supports resumable downloads, saving users time and frustration if an interruption occurs during large model transfers.)</p>
+<ol start="6" style="list-style-type: decimal">
+<li><strong>In the command <code>nohup ollama/bin/ollama serve</code>, what is the role of the <code>serve</code> argument passed to the Ollama?</strong></li>
+</ol>
+<blockquote>
+<p>A. It forces termination of active background sessions.</p>
+<p>B. It initializes and runs the local API server.</p>
+<p>C. It compiles the local source code into an executable.</p>
+<p>D. It downloads and installs the latest binary updates.</p>
+</blockquote>
+<p>Correct Answer: B (Passing the <code>serve</code> argument tells the Ollama executable to start up as an active API server ready to handle requests.)</p>
+
+</div>
+</div>
+</div>
+<hr>
+<center> 
+  <div class="footer">
+      All illustrations <a href="https://creativecommons.org/licenses/by/4.0/">CC-BY. </a>
+      <br>
+      All other materials <a href= "https://creativecommons.org/licenses/by/4.0/"> CC-BY </a> unless noted otherwise.
+  </div>
+</center>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="introduction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="explore-data-with-gander.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section"
+  }
+});
+});
+</script>
+
+</body>
+
+</html>
