@@ -7,6 +7,7 @@ learning-objectives-1
 rstudio-setup-with-gpu-on-anvil
 open-the-workspace-and-configure-compute-settings
 launch-rstudio
+setup-local-ai-model
 install-ollama-server-and-download-the-model
 connect-r-to-the-local-ai-server
 quiz

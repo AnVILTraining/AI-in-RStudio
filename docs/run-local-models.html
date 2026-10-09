@@ -171,9 +171,12 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="2.2.1" data-path="run-local-models.html"><a href="run-local-models.html#open-the-workspace-and-configure-compute-settings"><i class="fa fa-check"></i><b>2.2.1</b> Open the workspace and configure compute settings</a></li>
 <li class="chapter" data-level="2.2.2" data-path="run-local-models.html"><a href="run-local-models.html#launch-rstudio"><i class="fa fa-check"></i><b>2.2.2</b> Launch RStudio</a></li>
-<li class="chapter" data-level="2.2.3" data-path="run-local-models.html"><a href="run-local-models.html#install-ollama-server-and-download-the-model"><i class="fa fa-check"></i><b>2.2.3</b> Install Ollama server and download the model</a></li>
-<li class="chapter" data-level="2.2.4" data-path="run-local-models.html"><a href="run-local-models.html#connect-r-to-the-local-ai-server"><i class="fa fa-check"></i><b>2.2.4</b> Connect R to the local AI server</a></li>
-<li class="chapter" data-level="2.2.5" data-path="run-local-models.html"><a href="run-local-models.html#quiz"><i class="fa fa-check"></i><b>2.2.5</b> Quiz</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="run-local-models.html"><a href="run-local-models.html#setup-local-ai-model"><i class="fa fa-check"></i><b>2.3</b> Setup Local AI model</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="run-local-models.html"><a href="run-local-models.html#install-ollama-server-and-download-the-model"><i class="fa fa-check"></i><b>2.3.1</b> Install Ollama server and download the model</a></li>
+<li class="chapter" data-level="2.3.2" data-path="run-local-models.html"><a href="run-local-models.html#connect-r-to-the-local-ai-server"><i class="fa fa-check"></i><b>2.3.2</b> Connect R to the local AI server</a></li>
+<li class="chapter" data-level="2.3.3" data-path="run-local-models.html"><a href="run-local-models.html#quiz"><i class="fa fa-check"></i><b>2.3.3</b> Quiz</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="explore-data-with-gander.html"><a href="explore-data-with-gander.html"><i class="fa fa-check"></i><b>3</b> Explore data with gander</a></li>
@@ -290,8 +293,13 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li>Click the <strong>RStudio</strong> icon, then <strong>Open</strong>. RStudio will open in a new browser tab.</li>
 </ol>
 </div>
-<div id="install-ollama-server-and-download-the-model" class="section level3 hasAnchor" number="2.2.3">
-<h3><span class="header-section-number">2.2.3</span> Install Ollama server and download the model<a href="run-local-models.html#install-ollama-server-and-download-the-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+<div id="setup-local-ai-model" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> Setup Local AI model<a href="run-local-models.html#setup-local-ai-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>With your RStudio environment successfully providioned, the next step is to setup the local AI server and download the model.
+Here, we will use the Ollama server and pull the qwen3-coder:30b model.</p>
+<div id="install-ollama-server-and-download-the-model" class="section level3 hasAnchor" number="2.3.1">
+<h3><span class="header-section-number">2.3.1</span> Install Ollama server and download the model<a href="run-local-models.html#install-ollama-server-and-download-the-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ol style="list-style-type: decimal">
 <li>In RStudio, click the <strong>Terminal</strong> tab next to the Console tab.</li>
 </ol>
@@ -336,8 +344,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>NAME                 ID                  SIZE     PROCESSOR          CONTEXT    UNTIL                   
 qwen3-coder:30b    06c1097efce0    19 GB    25%/75% CPU/GPU    4096       About a minute from now </code></pre>
 </div>
-<div id="connect-r-to-the-local-ai-server" class="section level3 hasAnchor" number="2.2.4">
-<h3><span class="header-section-number">2.2.4</span> Connect R to the local AI server<a href="run-local-models.html#connect-r-to-the-local-ai-server" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="connect-r-to-the-local-ai-server" class="section level3 hasAnchor" number="2.3.2">
+<h3><span class="header-section-number">2.3.2</span> Connect R to the local AI server<a href="run-local-models.html#connect-r-to-the-local-ai-server" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="warning">
 <p>All commands in this section must be executed in the <strong>R Console</strong> (not inside Terminal).</p>
 </div>
@@ -366,8 +374,8 @@ Alternatively, you could code explicitly: `<code>chat &lt;- ellmer::chat_ollama(
 </ol>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="run-local-models.html#cb7-1" tabindex="-1"></a>chat<span class="sc">$</span><span class="fu">chat</span>(<span class="st">&quot;Tell me one short fact about human genome&quot;</span>)</span></code></pre></div>
 </div>
-<div id="quiz" class="section level3 hasAnchor" number="2.2.5">
-<h3><span class="header-section-number">2.2.5</span> Quiz<a href="run-local-models.html#quiz" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="quiz" class="section level3 hasAnchor" number="2.3.3">
+<h3><span class="header-section-number">2.3.3</span> Quiz<a href="run-local-models.html#quiz" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ol style="list-style-type: decimal">
 <li><strong>Ask AI a question using <code>chat$chat</code> and paste question and answer below?</strong></li>
 </ol>
