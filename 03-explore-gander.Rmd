@@ -188,7 +188,7 @@ We load these files in this way to meet the formatting required by DESeq2 later 
 
 2. Inspect your files manually in Console
 
-```{r}
+```{r, eval=FALSE}
 head(counts)
 head(metadata)
 ```
@@ -209,7 +209,7 @@ a. In a clean R Script, highlight the target variable or file name and provide a
 
 :eyes: **sample gander output**
 
-```{r}
+```{r, eval=FALSE}
 View(counts)
 ```
 
