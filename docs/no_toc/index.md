@@ -1,6 +1,6 @@
 ---
 title: "AI in RStudio"
-date: "October 08, 2026"
+date: "October 09, 2026"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: book.bib
@@ -31,11 +31,74 @@ Please check out our full collection of AnVIL and related resources: https://hut
 
 # Learning Objectives {-}
 
-<!-- Learning objectives for this activity come from the [Genetics Core Competencies](https://genetics-gsa.org/education/genetics-learning-framework/): -->
+1. Provision GPU-accelerated cloud infrastructure deploy local AI models in RStudio on AnVIL.
+1. Leverage `gander` AI assistant in RStudio for context-aware data exploration and coding.
+1. Use AI prompts in `gander` to drive RNA-seq data exploration and analysis with tidyverse and DESeq2.
 
-<!-- - Objective 1 -->
-<!-- - Objective 2 -->
-<!-- - Objective 3 -->
+# Table of Contents {-}
 
-<!-- Please also see the Bioinformatics core competencies for undergraduate life sciences education from NIBLSE: https://journals.plos.org/plosone/article/figure?id=10.1371/journal.pone.0196878.t002 -->
+1. About this Course
 
+	> Welcome	
+	>	
+	> Learning Goals
+	>
+	> Abstract
+	>
+	> Introduction
+	>
+	> Ethical use of AI for data analysis
+	>	
+	> Methods
+	>
+	> Quiz
+
+2. Run Local Models
+    
+	> Learning objectives
+	>
+    > RStudio Setup with GPU on AnVIL
+	>
+    > Install Ollama server and download qwen3-coder
+	>
+    > Connect R to the local AI server via ellmer
+	>
+    > Chapter Quiz
+
+3. Explore data with gander
+
+    > Learning objectives
+	>
+    > Configure gander and setup keyboard shortcut
+	>
+    > Good habits: using gander_peek() and requesting code explanations
+	>
+    > Import the data from Google Cloud Storage 
+	>
+    > Explore RNA-seq counts and metadata with gander and Tidyverse
+	>
+    > Chapter Quiz
+
+4. Run DESeq2 
+
+    > Learning objectives
+	>
+    > Filter low counts
+	>
+    > Run differential expression with DESeq2
+	>
+    > Visualize plots and save results
+	>
+    > Chapter Quiz
+
+5. API Hosts 
+
+::: {.wip}
+This section is a **Work in Progress**.
+:::
+
+6. Troubleshooting and Tips
+
+::: {.wip}
+This section is a **Work in Progress**.
+:::
