@@ -1,0 +1,9 @@
+1-Introduction.md
+2-Run-Local-Models.md
+3-Explore-data-with-gander.md
+4-Run-DESeq2.md
+5-References.md
+About-this-Book.md
+Learning-Objectives.md
+Table-of-Contents.md
+About-the-Authors.md
