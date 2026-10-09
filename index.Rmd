@@ -80,6 +80,7 @@ Please check out our full collection of AnVIL and related resources: https://hut
     > Chapter Quiz
 
 4. Run DESeq2 
+
     > Learning objectives
 	>
     > Filter low counts
@@ -92,4 +93,12 @@ Please check out our full collection of AnVIL and related resources: https://hut
 
 5. API Hosts 
 
+::: {.wip}
+This section is a **Work in Progress**.
+:::
+
 6. Troubleshooting and Tips
+
+::: {.wip}
+This section is a **Work in Progress**.
+:::
