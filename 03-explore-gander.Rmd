@@ -1,2 +1,536 @@
+```{r, include = FALSE}
+ottrpal::set_knitr_image_path()
+```
+
 # Explore data with gander
+
+Simplifying your data exploration with Local AI, gander and Tidyverse in RStudio
+
+<br>
+
+## Learning Objectives
+
+1. Configure gander package with a local AI model and create a keyboard shortcut in RStudio
+1. Import genomics datasets from Google Cloud Storage into your AnVIL workspace and load onto RStudio
+1. Explore the count matrix and sample metadata with gander and tidyverse
+
+## Configure gander
+
+::: {.warning}
+All commands in this section must be executed in the **R Console** (not inside Terminal). 
+:::
+
+###  Install and load required packages
+
+Run the following code in the R Console
+
+```{r, eval=FALSE}
+# AI integration packages
+install.packages("gander")
+library(gander)
+```
+
+### Configure gander's chat model
+
+To connect the gander package to your local Ollama server running the AI model, set the default option to your chat connection:
+
+```{r, eval=FALSE}
+options(gander.chat = chat)
+```
+
+### Setup keyboard shortcut for gander
+
+Setting a keyboard shortcut allows you to invoke gander instantly inside your code editor without manually typing console commands.
+
+Create a gander shortcut:
+
+1. In **RStudio**: Navigate to Tools → Modify Keyboard Shortcuts
+2. Search for “gander” 
+3. Assign a convenient shortcut: Shift+Cmd+g (macOS)
+
+### Test gander shortcut
+
+Your RStudio session now has an AI research partner that lives on your AnVIL instance. Let's put it to work. 
+Instead of jumping back and forth to an external browser chat window, gander reads your active code context and environment variables directly inside the IDE.
+
+::: {.dictionary}
+**How to use gander shortcut**:
+
+In a clean R Script:
+
+  1. **Highlight** - an object to query (or word, a sentence, code or an empty space). 
+
+  2. **Evoke gander** - using your pre-set shortcut *Shift+Cmd+g*. 
+
+  3. **Enter a prompt** - a short, concrete instruction of what you want to do in plain language. 
+
+  4. Review output
+:::
+
+1. Ask AI a question via gander shortcut. In a clean R Script:  
+
+> 1. **Highlight**: `options(gander.chat = chat)`
+>
+> 2. **Evoke gander shortcut**: Shift+Cmd+g
+> 
+> 3. **Enter text prompt**: “Briefly explain this code for me”
+>
+> 4. **Review the output**  -  e.g. output code before running the generated code
+
+```{r, fig.align='center', out.width="100%", echo = FALSE}
+ottrpal::include_slide("https://docs.google.com/presentation/d/1zrqf2fLtglxi5l1qx5GCaRlDkKR8ZFp-ldmlqtqWGZg/edit?slide=id.h324ef5e179219b9e_0_10#slide=id.h324ef5e179219b9e_0_10")
+```
+
+Sample gander output:
+
+```text
+This code sets a global option in R that tells the gander package which chat object to use for interactive AI assistance. 
+The gander package is designed to help with data analysis by providing AI-powered insights and explanations. 
+By setting options(gander.chat = chat), you're connecting gander to an existing chat session (likely initialized with a language model provider like OpenAI or Ollama) so that when you run gander commands, they can use this pre-established chat connection for communication with the language model.
+```
+
+::: {.notice}
+**Interface Options**: 
+
+- Choosing **Replace** means that the output will replace your highlighted text. 
+
+- Other options include **Prefix** (placed before your highlighted text) or **Suffix** (placed after your highlighted text.) 
+:::
+
+
+### Quiz
+
+1. **What is the primary benefit of using `gander` over a standard web-based AI chat window?**
+
+> A. It automatically uploads all of your local workspace files to a public cloud server for global sharing.
+>
+> B. It brings the AI assistant directly into your IDE workflow, allowing it to seamlessly evaluate your local R objects and script context without manual copy-pasting.
+>
+> C. It forces Ollama to bypass your CPU entirely and store 100% of large models within standard RAM.
+>
+> D. It permanently replaces the R Console with an automated script executor that runs code without user supervision.
+
+Correct Answer: B (gander is built specifically for data scientists to reduce friction by integrating AI into RStudio. Because it links with packages like ellmer and your local session, it can automatically detect your active R environment objects and surrounding code context.)
+
+
+2. **Why would you want to keep your script lean and open a new .R script containing only the necessary code when asking Gander for help?**
+
+> A. To automatically install missing Bioconductor package dependencies.
+>
+> B. To prevent background code clutter from sending unrelated context and confusing the assistant.
+>
+> C. To permanently save your workspace environment variables to disk.
+>
+> D. To ensure your API key remains hidden from the R console history.
+
+Correct Answer: B (A long script sends a pile of unrelated code, adding unnecessary context noise).
+
+
+3. **What happens if you forget to run the command “options(gander.chat = chat)” before trying to use gander in RStudio?**
+
+> A. The keyboard shortcut will open a web browser to a public AI chat window instead.
+>
+> B. gander won't know where to send your prompts, similar to having a phone plugged in without dialing a number.
+>
+> C. R will throw a syntax error and automatically shut down the background Ollama server.
+>
+> D. The package will default to using a slower cloud-based model via the internet.
+
+Correct Answer: B (Running options(gander.chat = chat) connects the gander package directly to your local Ollama chat connection. Without it, gander has no designated target for your prompts, meaning it cannot route your questions to your local AI model. 
+
+
+4. **After leaving your RStudio session open on AnVIL, you step away and it automatically terminates after 30 minutes of inactivity. When you return the next day and resume working without having manually shut anything down, you run your script and encounter this error: “Error in chat_ollama(...) : could not find function "chat_ollama"**
+
+> A. The Ollama background server process stopped overnight, uninstalling all R packages from the container.
+>
+> B. The container restarted due to the inactivity timeout, meaning the R session started fresh and the ellmer package (containing chat_ollama) was no longer loaded.
+>
+> C. RStudio restored a saved workspace from yesterday, which preserved your environment variables but uninstalled all packages.
+>
+> D. The Sys.getenv() function timed out and corrupted the local R environment's function namespace.
+
+Correct Answer: B (The container restarted due to the inactivity timeout, meaning the R session started fresh and the ellmer package containing chat_ollama was no longer loaded in memory.)
+
+
+## Import Data
+
+###  Install and load required packages
+
+Run the following code in the R Console
+
+```{r, eval=FALSE}
+# AnVIL packages
+BiocManager::install("AnVILGCP")
+library(AnVILGCP)
+```
+
+###  Import data from Google Cloud Storage
+
+There are many ways to bring in data into RStudio on AnVIL. 
+On ways to bring, import or access data on AnVIL see [Data on AnVIL webbook](https://htmlpreview.github.io/?https://raw.githubusercontent.com/fhdsl/Data_on_AnVIL/preview-36/docs/index.html).
+
+Here, we will bring in data from the existing Google bucket associated with an AnVIL workspace. 
+
+1. Copy the `airway` dataset files (counts and metadata) from an AnVIL workspace bucket:
+
+```{r, eval=FALSE}
+gcloud_storage( "cp gs://fc-493d543d-3286-48ad-aeec-0bcb84b06fe5/airwaycounts.csv . " )
+gcloud_storage( "cp gs://fc-493d543d-3286-48ad-aeec-0bcb84b06fe5/sample_metadata.csv . " )
+```
+
+2. In the RStudio 'Files' pane (bottom-right), confirm that **airwaycounts.csv** and **sample_metadata.csv** are now present in your working directory.
+
+### Load Data into R
+
+1. Load counts and metadata into R
+
+```{r, eval=FALSE}
+counts <- read.csv("airwaycounts.csv", row.names = 1, check.names = FALSE)
+metadata <- read.csv("sample_metadata.csv", row.names = 1 )
+```
+
+We load these files in this way to meet the formatting required by DESeq2 later on, ensuring the count matrix file is compatible with the metadata file:
+
+- row.names = 1 (Counts): Sets the first column of the counts file (**Ensembl IDs**) as the row names.
+- check.names = FALSE (Counts): Prevents R from altering sample names by default (e.g., converting characters like dashes into dots.)
+- row.names = 1 (Metadata): Sets the first column of the metadata file (**sample IDs**) as the row names.
+
+2. Inspect your files manually in Console
+
+```{r, eval=FALSE}
+head(counts)
+head(metadata)
+```
+
+```{r, fig.align='center', out.width="100%", echo = FALSE}
+ottrpal::include_slide("https://docs.google.com/presentation/d/1zrqf2fLtglxi5l1qx5GCaRlDkKR8ZFp-ldmlqtqWGZg/edit?slide=id.h324ef5e179219b9e_0_18#slide=id.h324ef5e179219b9e_0_18")
+```
+
+### Quiz
+
+1. **Which package moves files between the workspace bucket and the RStudio instance?**
+
+> A. DESeq2
+>
+> B. gander
+>
+> C. AnVILGCP
+>
+> D. ellmer
+
+Correct Answer: C (AnVILGCP package, a core AnVIL package, provides specialized functions like gsutil_cp() to coordinate data transfers from Google bucket and the persistent disk of an RStudio environment)
+
+
+2. **In the command `gcloud_storage( "cp gs://fc-493d543d-3286-48ad-aeec-0bcb84b06fe5/airwaycounts.csv . " )`, what is the correct prefix required to specify the Google Cloud Storage bucket path?**
+
+> A. cp
+>
+> B. gs://
+>
+> C. fc-
+>
+> D. .
+
+Correct Answer: B (the prefix gs:// is required by Google Cloud utilities to recognize and access a cloud storage bucket. Following the gs://, the fc-493d543d-...string represents your unique workspace project ID/bucket name, while cp is the copy command itself, and ‘.’ represents the local destination directory.)
+
+
+## Inspect data with gander shortcut
+
+### Inspect counts file
+
+1. In a clean R Script, highlight the target variable or file name and provide a prompt. 
+
+> **HIGHLIGHT**: `counts`
+>
+> **PROMPT**: View counts
+
+***sample gander output***
+
+```{r, eval=FALSE}
+View(counts)
+```
+
+Note, gander output may and likely will vary. For example, and alternative output to the same short 'View counts' prompt might be simply
+
+```{r, eval=FALSE}
+counts
+```
+
+2. In a clean R Script, highlight the target variable or file name and provide a prompt. 
+
+> **HIGHLIGHT**: `counts`
+>
+> **PROMPT**: summarize counts stats
+
+***sample gander output***
+
+```{r, eval=FALSE}
+summarize(counts, across(everything(), list(mean = mean, sd = sd, min = min, max = max)))
+```
+
+3. Use `gander_peek()` to check captured context
+
+In the **R Console**, type `gander_peek()` to see what gander saw:
+
+```{r, fig.align='center', out.width="100%", echo = FALSE}
+ottrpal::include_slide("https://docs.google.com/presentation/d/1zrqf2fLtglxi5l1qx5GCaRlDkKR8ZFp-ldmlqtqWGZg/edit?slide=id.h4a51e79d04e2fb4a_1_0#slide=id.h4a51e79d04e2fb4a_1_0")
+```
+
+Based on the peek output, the assistant captures:
+
+- Active file context: The object or file currently in focus (e.g., counts).
+- User request: The explicit prompt provided (e.g., summarize counts stats).
+- R environment snapshot: A preview of the object's structure (e.g., data frame layout).
+- Assistant decision: The generated output based on the observed context.
+
+4. Ask gander to explain code
+
+Leverage gander to break down unfamiliar logic, functions, or script sections directly within your workflow.
+
+> **HIGHLIGHT**: `summarize(counts, across(everything(), list(mean = mean, sd = sd, min = min, max = max)))`
+>
+> **PROMPT**: Briefly explain this code
+
+***sample gander output***
+
+```text
+This code calculates summary statistics (mean, standard deviation, minimum, and maximum) for all columns in the counts data frame. 
+The across(everything()) selects all columns, and list() applies all four summary functions to each column simultaneously, returning a single row with all statistics arranged in columns.
+```
+
+### Inspect metadata file with gander shortcut
+
+1. In a clean R Script, highlight the target variable or file name and provide a prompt. 
+
+> **HIGHLIGHT**: `metadata`
+>
+> **PROMPT**: View my metadata file
+
+***sample gander output***
+
+```{r, eval=FALSE}
+metadata
+```
+
+2. In a clean R Script, highlight the target variable or file name and provide a prompt. 
+
+> **HIGHLIGHT**: `metadata`
+>
+> **PROMPT**: List all variables in my metadata
+
+***sample gander output***
+
+```text
+SampleName, cell, dex, albut, Run, avgLength, Experiment, Sample, BioSample
+```
+
+### Quiz
+
+
+1. **When you highlight the object name ‘counts’ in your R script and invoke ‘gander’ with the prompt ‘View counts’, how does gander =generate a meaningful output?**
+
+> A. It queries a public online database of human genetic sequences via an external API.
+>
+> B. It resets your R session memory to clear any conflicting variables.
+>
+> C. It reads your active code context and inspects your local R workspace environment to understand what the counts object contains.
+>
+> D. It automatically installs and runs the DESeq2 package in the background.
+
+Correct Answer: C (gander leverages Integrated environment context integration, allowing it to inspect active script variables and query your local R environment directly without requiring you to manually copy and paste data into an external chat box.)
+
+
+## Explore data with gander and tydiverse
+
+### Install and Load Required Packages
+
+
+Run the following code in the R Console
+
+```{r, eval=FALSE}
+# Common R tools for data manipulation and analysis
+install.packages("tidyverse")
+library(tidyverse)
+```
+
+### Explore counts file with gander and tidyverse
+
+1. Inspect counts file. In a clean R Script: 
+
+> **HIGHLIGHT**: `counts`
+>
+> **PROMPT**: Explore my counts file with tydiverse
+
+***sample gander output***
+
+```{r, eval=FALSE}
+  counts %>%
+  rownames_to_column(var = "gene") %>%
+  pivot_longer(cols = -gene, names_to = "sample", values_to = "count") %>%
+  group_by(sample) %>%
+  summarize(total_counts = sum(count)) %>%
+  arrange(desc(total_counts))
+```
+
+After running the above code, here is the output:
+
+```text
+# A tibble: 8 × 2
+  sample     total_counts
+  <chr>             <int>
+1 SRR1039517     30818215
+2 SRR1039512     25348649
+3 SRR1039516     24448408
+4 SRR1039521     21164133
+5 SRR1039508     20637971
+6 SRR1039520     19126151
+7 SRR1039509     18809481
+8 SRR1039513     15163415
+```
+
+2. Ask specific questions. In a clean R Script: 
+
+> **HIGHLIGHT**: `counts`
+>
+> **PROMPT**: What is the library size of each sample? Use tidyverse
+
+***sample gander output***
+
+```{r, eval=FALSE}
+  counts %>%
+  summarise_all(sum) %>%
+  gather(sample, count) %>%
+  mutate(count = as.numeric(count)) %>%
+  group_by(sample) %>%
+  summarise(lib_size = sum(count))
+```
+
+3. Ask another specific questions. In a clean R Script: 
+
+> **HIGHLIGHT**: `counts`
+>
+> **PROMPT**: How many genes (rows) have zero counts across every single sample in the dataset? Use tidyverse
+
+
+```{r, eval=FALSE}
+counts %>%
+  rowSums() %>%
+  {sum(. == 0)}
+```
+
+4. Ask to explain code line by line. In a clean R Script:
+
+
+> **HIGHLIGHT**:
+
+```{r, eval=FALSE}
+counts %>%
+  rowSums() %>%
+  {sum(. == 0)}
+```
+
+> **PROMPT**: Minimally annotate this code line by line
+
+***sample gander output***
+
+```text
+# Sum rows to get total counts per gene
+# Count how many genes have zero expression across all samples
+# This gives the number of genes with no expression in any sample
+```
+
+### Explore metadata file with gander and tidyverse
+
+1. Inspect metadata file with tidyverse. In a clean R Script:
+
+> **HIGHLIGHT**: `metadata`
+>
+> **PROMPT**: Explore my metadata file with tydiverse
+
+***sample gander output***
+
+```{r, eval=FALSE}
+metadata %>% 
+  group_by(cell, dex) %>% 
+  summarise(
+    count = n(),
+    avg_length = mean(avgLength),
+    .groups = "drop"
+  ) %>% 
+  arrange(desc(count))
+```
+
+After running this code, here is the output:
+
+```text
+# A tibble: 8 × 4
+  cell    dex   count avg_length
+  <chr>   <chr> <int>      <dbl>
+1 N052611 trt       1         87
+2 N052611 untrt     1        126
+3 N061011 trt       1         98
+4 N061011 untrt     1        101
+5 N080611 trt       1        126
+6 N080611 untrt     1        120
+7 N61311  trt       1        126
+8 N61311  untrt     1        126
+```
+
+2. Ask a specific question. In a clean R Script:
+
+> **HIGHLIGHT**: `metadata`
+>
+> **PROMPT**: How does avg_length compare between treated and untreated conditions? Use tidyverse
+
+***sample gander output***
+
+```{r, eval=FALSE}
+metadata %>%
+  group_by(dex) %>%
+  summarize(avg_length = mean(avgLength))
+```
+
+
+### Quiz
+
+1. **What is the sequence and best practice when interacting with the AI assistant gander in RStudio?**
+
+> A. Open a blank script, type your prompt in plain language, and automatically execute the generated code.
+>
+> B. Open a blank script, highlight a specific object of query, invoke gander with the shortcut, enter a short and concrete prompt, and carefully review the output before running the generated code.
+>
+> C. Trigger the shortcut first, type a broad multi-task instruction like "do all my RNA-seq analysis," and let the AI overwrite your workspace files. 
+>
+> D. Skip highlighting any objects, use the shortcut to launch a local Ollama server, and let the model automatically push results to GitHub.
+
+Correct Answer: B (Using gander effectively follows starting with a clean script, highlighting the specific object of interest to provide environment context, invoking the shortcut, supplying a concrete instruction, and reviewing the returned code before execution.)
+
+
+2. **When working with tidyverse pipelines in R, what is the primary role of the pipe operator (%>%)?** 
+
+> A. It permanently saves intermediate data frames to the hard drive as CSV files.
+>
+> B. It forwards the output of one function directly into the first argument of the next function.
+>
+> C. It connects your local R session to the remote Google Cloud Storage bucket.
+>
+> D. It automatically installs missing packages like DESeq2 from Bioconductor.
+
+Correct Answer: B (The pipe operator (%>%) chains data operations together by passing the expression on its left-hand side as the primary argument to the function on its right-hand side.)
+
+
+3. **When you highlight a snippet of tidyverse code and ask gander to "Minimally annotate this code line by line", what AI capability is primarily being demonstrated?**
+
+> A. Natural language code comprehension, allowing the local AI to interpret complex syntax and translate its logic into human-readable comments.
+>
+> B. Automated neural network model retraining using your live sequencing data.
+>
+> C. Automatic compilation of R code into high-speed machine learning algorithms.
+>
+> D. Instantaneous translation of R scripts into Python Pandas syntax.
+
+Correct Answer: A (gander uses the local large language model to parse code syntax and semantics, enabling it to explain, document, or annotate code snippets contextually right inside your environment.)
+
+
+
 
