@@ -42,21 +42,22 @@ options(gander.chat = chat)
 Setting a keyboard shortcut allows you to invoke gander instantly inside your code editor without manually typing console commands.
 
 Create a gander shortcut:
-1. In **RStudio**: Navigate to Tools → Modify Keyboard Shortcuts…
+
+1. In **RStudio**: Navigate to Tools → Modify Keyboard Shortcuts
 2. Search for “gander” 
-3. Assign a convenient shortcut, Shift+Cmd+g (macOS)
+3. Assign a convenient shortcut: Shift+Cmd+g (macOS)
 
 ### Test gander shortcut
 
 Your RStudio session now has an AI research partner that lives on your AnVIL instance. Let's put it to work. 
 Instead of jumping back and forth to an external browser chat window, gander reads your active code context and environment variables directly inside the IDE.
 
-:::important
+::: {.dictionary}
 **How to use gander shortcut**:
-In a clean R Script: \
-  1. **Highlight** - an object to query (or word, a sentence, code or an empty space) \ 
-  2. **Evoke gander** - using your pre-set shortcut *Shift+Cmd+g* \
-  3. **Enter a prompt** - a short, concrete instruction of what you want to do in plain language \
+In a clean R Script:
+  1. **Highlight** - an object to query (or word, a sentence, code or an empty space) 
+  2. **Evoke gander** - using your pre-set shortcut *Shift+Cmd+g* 
+  3. **Enter a prompt** - a short, concrete instruction of what you want to do in plain language 
   4. **Review the output**  -  e.g. output code before running the generated code
 :::
 
@@ -64,13 +65,56 @@ In a clean R Script: \
 
 In a clean R Script:  
 
-> Highlight: `options(gander.chat = chat)`
+> 1. **Highlight**: `options(gander.chat = chat)`
 >
-> Evoke gander shortcut: Shift+Cmd+g
+> 2. **Evoke gander shortcut**: Shift+Cmd+g
 > 
-> Enter text prompt: “Briefly explain this code for me”
+> 3. **Enter text prompt**: “Briefly explain this code for me”
 
 ```{r, fig.align='center', out.width="100%", echo = FALSE, fig.alt= "Don't forget the GPU!"}
 ottrpal::include_slide("https://docs.google.com/presentation/d/1zrqf2fLtglxi5l1qx5GCaRlDkKR8ZFp-ldmlqtqWGZg/edit?slide=id.h324ef5e179219b9e_0_10#slide=id.h324ef5e179219b9e_0_10")
 ```
+
+> 4. Review the output. 
+
+Sample gander output:
+
+```text
+This code sets a global option in R that tells the gander package which chat object to use for interactive AI assistance. The gander package is designed to help with data analysis by providing AI-powered insights and explanations. By setting options(gander.chat = chat), you're connecting gander to an existing chat session (likely initialized with a language model provider like OpenAI or Ollama) so that when you run gander commands, they can use this pre-established chat connection for communication with the language model.
+```
+
+::: {.notice}
+**Interface Options**: 
+- Choosing Replace means that the output will replace your highlighted text. 
+- Other options include Prefix (placed before your highlighted text) or Suffix (placed after your highlighted text.) 
+:::
+
+
+## Import Data
+
+###  Install and load required packages
+
+Run the following code in the R Console
+
+```{r, eval=FALSE}
+# AnVIL packages
+BiocManager::install("AnVILGCP")
+library(AnVILGCP)
+```
+
+###  Import data from Google Cloud Storage
+
+There are many ways to bring in data into RStudio on AnVIL. 
+On ways to bring, import or access data on AnVIL see [Data on AnVIL webbook](https://htmlpreview.github.io/?https://raw.githubusercontent.com/fhdsl/Data_on_AnVIL/preview-36/docs/index.html).
+
+Here, we will bring in data from the existing Google bucket associated with an AnVIL workspace. 
+
+1. Copy the `airway` dataset files (counts and metadata) from an AnVIL workspace bucket:
+
+```{r, eval=FALSE}
+gcloud_storage( "cp gs://fc-493d543d-3286-48ad-aeec-0bcb84b06fe5/airwaycounts.csv . " )
+gcloud_storage( "cp gs://fc-493d543d-3286-48ad-aeec-0bcb84b06fe5/sample_metadata.csv . " )
+```
+
+2. In the RStudio 'Files' pane (bottom-right), confirm that **airwaycounts.csv** and **sample_metadata.csv** are now present in your working directory.
 
