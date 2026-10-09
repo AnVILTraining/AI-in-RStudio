@@ -77,7 +77,7 @@ In a clean R Script:
 >
 > 4. **Review the output**  -  e.g. output code before running the generated code
 
-```{r, fig.align='center', out.width="100%", echo = FALSE, fig.alt= "Don't forget the GPU!"}
+```{r, fig.align='center', out.width="100%", echo = FALSE}
 ottrpal::include_slide("https://docs.google.com/presentation/d/1zrqf2fLtglxi5l1qx5GCaRlDkKR8ZFp-ldmlqtqWGZg/edit?slide=id.h324ef5e179219b9e_0_10#slide=id.h324ef5e179219b9e_0_10")
 ```
 
@@ -112,6 +112,7 @@ By setting options(gander.chat = chat), you're connecting gander to an existing 
 
 Correct Answer: B (gander is built specifically for data scientists to reduce friction by integrating AI into RStudio. Because it links with packages like ellmer and your local session, it can automatically detect your active R environment objects and surrounding code context.)
 
+
 2. **Why would you want to keep your script lean and open a new .R script containing only the necessary code when asking Gander for help?**
 
 > A. To automatically install missing Bioconductor package dependencies.
@@ -124,6 +125,7 @@ Correct Answer: B (gander is built specifically for data scientists to reduce fr
 
 Correct Answer: B (A long script sends a pile of unrelated code, adding unnecessary context noise).
 
+
 3. **What happens if you forget to run the command “options(gander.chat = chat)” before trying to use gander in RStudio?**
 
 > A. The keyboard shortcut will open a web browser to a public AI chat window instead.
@@ -135,6 +137,7 @@ Correct Answer: B (A long script sends a pile of unrelated code, adding unnecess
 > D. The package will default to using a slower cloud-based model via the internet.
 
 Correct Answer: B (Running options(gander.chat = chat) connects the gander package directly to your local Ollama chat connection. Without it, gander has no designated target for your prompts, meaning it cannot route your questions to your local AI model. 
+
 
 4. **After leaving your RStudio session open on AnVIL, you step away and it automatically terminates after 30 minutes of inactivity. When you return the next day and resume working without having manually shut anything down, you run your script and encounter this error: “Error in chat_ollama(...) : could not find function "chat_ollama"**
 
@@ -199,7 +202,7 @@ head(counts)
 head(metadata)
 ```
 
-```{r, fig.align='center', out.width="100%", echo = FALSE, fig.alt= "Don't forget the GPU!"}
+```{r, fig.align='center', out.width="100%", echo = FALSE}
 ottrpal::include_slide("https://docs.google.com/presentation/d/1zrqf2fLtglxi5l1qx5GCaRlDkKR8ZFp-ldmlqtqWGZg/edit?slide=id.h324ef5e179219b9e_0_18#slide=id.h324ef5e179219b9e_0_18")
 ```
 
@@ -269,7 +272,7 @@ summarize(counts, across(everything(), list(mean = mean, sd = sd, min = min, max
 
 In the **R Console**, type `gander_peek()` to see what gander saw:
 
-```{r, fig.align='center', out.width="100%", echo = FALSE, fig.alt= "Don't forget the GPU!"}
+```{r, fig.align='center', out.width="100%", echo = FALSE}
 ottrpal::include_slide("https://docs.google.com/presentation/d/1zrqf2fLtglxi5l1qx5GCaRlDkKR8ZFp-ldmlqtqWGZg/edit?slide=id.h4a51e79d04e2fb4a_1_0#slide=id.h4a51e79d04e2fb4a_1_0")
 ```
 
@@ -361,7 +364,7 @@ library(tidyverse)
 ***sample gander output***
 
 ```{r, eval=FALSE}
-counts %>%
+  counts %>%
   rownames_to_column(var = "gene") %>%
   pivot_longer(cols = -gene, names_to = "sample", values_to = "count") %>%
   group_by(sample) %>%
@@ -502,6 +505,7 @@ metadata %>%
 
 Correct Answer: B (Using gander effectively follows starting with a clean script, highlighting the specific object of interest to provide environment context, invoking the shortcut, supplying a concrete instruction, and reviewing the returned code before execution.)
 
+
 2. **When working with tidyverse pipelines in R, what is the primary role of the pipe operator (%>%)?** 
 
 > A. It permanently saves intermediate data frames to the hard drive as CSV files.
@@ -513,6 +517,7 @@ Correct Answer: B (Using gander effectively follows starting with a clean script
 > D. It automatically installs missing packages like DESeq2 from Bioconductor.
 
 Correct Answer: B (The pipe operator (%>%) chains data operations together by passing the expression on its left-hand side as the primary argument to the function on its right-hand side.)
+
 
 3. **When you highlight a snippet of tidyverse code and ask gander to "Minimally annotate this code line by line", what AI capability is primarily being demonstrated?**
 
