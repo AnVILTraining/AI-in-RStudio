@@ -72,7 +72,7 @@ nohup ollama/bin/ollama serve > ollama.log 2>&1 &
 ollama/bin/ollama pull qwen3-coder:30b
 ```
 
-::: {.warning}
+::: {.notice}
 - Ollama may unload the model from memory after 5 or more minutes of inactivity.\ 
 - To keep the model in memory you can set the environment variable `OLLAMA_KEEP_ALIVE=-1`. \
 - If you don’t keep Ollama ‘alive’, after inactivity, you may need to pull the model again in the Terminal like so: `ollama/bin/ollama pull qwen3-coder:30b`.
@@ -84,7 +84,7 @@ ollama/bin/ollama pull qwen3-coder:30b
 ollama/bin/ollama run qwen3-coder:30b "Say hi"
 ```
 
-::: {.warning}
+::: {.notice}
 **NOTE**
 - The first response may take more than a minute (subsequent responses will be faster). You can check by running the same test prompt a second time and noting the increase in the speed of the response.
 
@@ -144,7 +144,14 @@ chat$chat("Tell me one short fact about human genome")
 
 ### Quiz
 
-1. **Why does enabling a GPU matter for this workshop?**
+1. **Ask AI a question using `chat$chat` and paste question and answer below?**
+
+> Question:
+>
+> Answer:
+
+
+2. **Why does enabling a GPU matter for this workshop?**
 
 > A. DESeq2 requires a GPU.
 >
@@ -157,7 +164,7 @@ chat$chat("Tell me one short fact about human genome")
 Correct Answer: B (The LLM is hosted locally and generates responses much faster on a GPU.)
 
 
-2. **You provision an RStudio instance with 8 CPUs, 52 GB of system memory, and 1 NVIDIA Tesla T4 GPU (16 GB VRAM). You plan to load a 19 GB model (e.g. qwen3-coder). What will happen when you load the model?**
+3. **You provision an RStudio instance with 8 CPUs, 52 GB of system memory, and 1 NVIDIA Tesla T4 GPU (16 GB VRAM). You plan to load a 19 GB model (e.g. qwen3-coder). What will happen when you load the model?**
 
 > A. The model will fit entirely within the 16 GB VRAM of the Tesla T4 GPU.
 >
@@ -170,7 +177,7 @@ Correct Answer: B (The LLM is hosted locally and generates responses much faster
 Correct Answer: C (Because the ~19 GB model exceeds the Tesla T4's 16 GB VRAM capacity, the model cannot fit entirely on the graphics card and automatically offloads the remaining layers to the CPU, allowing the model to run successfully even though it will be slower than a fully GPU-resident model.)
 
 
-3. **What is the primary purpose of running the “nohup” command?**
+4. **What is the primary purpose of running the “nohup” command?**
 
 > A. To run the Ollama server in the background, keeping it alive even if the terminal session ends or the tab is closed, while redirecting output to a log file.
 >
@@ -183,7 +190,7 @@ Correct Answer: C (Because the ~19 GB model exceeds the Tesla T4's 16 GB VRAM ca
 Correct Answer: A (nohup (no hangup) combined with the trailing & allows the process to continue running in the background after the terminal session closes, preventing the process from terminating when you close your terminal window.)
 
 
-4.  **If a user’s network connection drops halfway through downloading the 19 GB qwen3-coder:30b model, what happens when they rerun the pull command?**
+5.  **If a user’s network connection drops halfway through downloading the 19 GB qwen3-coder:30b model, what happens when they rerun the pull command?**
 
 > A. The download fails permanently, requiring them to delete the ollama directory and start from scratch.
 >
@@ -196,7 +203,7 @@ Correct Answer: A (nohup (no hangup) combined with the trailing & allows the pro
 Correct Answer: B (Ollama's pull command supports resumable downloads, saving users time and frustration if an interruption occurs during large model transfers.)
 
 
-5. **In the command `nohup ollama/bin/ollama serve`, what is the role of the `serve` argument passed to the Ollama?**
+6. **In the command `nohup ollama/bin/ollama serve`, what is the role of the `serve` argument passed to the Ollama?**
 
 > A. It forces termination of active background sessions.
 >
