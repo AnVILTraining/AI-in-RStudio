@@ -46,6 +46,11 @@ Before you can interact with local AI models, you must provision a cloud-based R
 1. When your environment is ready, its status will change to **green** (Running).
 1. Click the **RStudio** icon, then **Open**. RStudio will open in a new browser tab.
 
+## Setup Local AI model
+
+With your RStudio environment successfully providioned, the next step is to setup the local AI server and download the model. 
+Here, we will use the Ollama server and pull the qwen3-coder:30b model.
+
 ### Install Ollama server and download the model
 
 1. In RStudio, click the **Terminal** tab next to the Console tab.
