@@ -31,43 +31,65 @@ Please check out our full collection of AnVIL and related resources: https://hut
 
 # Learning Objectives {-}
 
-1. Provision GPU-accelerated cloud infrastructure on AnVIL and deploy local AI models within RStudio.
-1. Explore gander, the RStudio AI assistant, to leverage context-aware data exploration and coding assistance.
-1. Execute bioinformatics workflow through gander using plain-language AI prompts combined with tidyverse and DESeq2.
+1. Provision GPU-accelerated cloud infrastructure deploy local AI models in RStudio on AnVIL.
+1. Leverage `gander` AI assistant in RStudio for context-aware data exploration and coding.
+1. Use AI prompts in `gander` to drive RNA-seq data exploration and analysis with tidyverse and DESeq2.
 
 # Table of Contents {-}
 
 1. About this Course
-    Welcome	
-    Learning Goals
-	  Abstract
-	  Introduction
-	  Ethical use of AI for data analysis
-	  Methods
-	  Quiz
+
+	> Welcome	
+	>	
+	> Learning Goals
+	>
+	> Abstract
+	>
+	> Introduction
+	>
+	> Ethical use of AI for data analysis
+	>	
+	> Methods
+	>
+	> Quiz
 
 2. Run Local Models
-    Learning objectives
-    RStudio Setup with GPU on AnVIL
-    Install Ollama server and download qwen3-coder	
-    Connect R to the local AI server via ellmer
-    Chapter Quiz
+    
+	> Learning objectives
+	>
+    > RStudio Setup with GPU on AnVIL
+	>
+    > Install Ollama server and download qwen3-coder
+	>
+    > Connect R to the local AI server via ellmer
+	>
+    > Chapter Quiz
 
 3. Explore data with gander
-    Learning objectives
-    Configure gander and setup keyboard shortcut
-    Good habits: using gander_peek() and requesting code explanations
-    Import the data from Google Cloud Storage 
-    Explore RNA-seq count matrices and metadata with gander and Tidyverse
-    Chapter Quiz
+
+    > Learning objectives
+	>
+    > Configure gander and setup keyboard shortcut
+	>
+    > Good habits: using gander_peek() and requesting code explanations
+	>
+    > Import the data from Google Cloud Storage 
+	>
+    > Explore RNA-seq counts and metadata with gander and Tidyverse
+	>
+    > Chapter Quiz
 
 4. Run DESeq2 
-    Learning objectives
-    Filter low counts
-    Run differential expression with DESeq2
-    Visualize plots and save results
-    Chapter Quiz
+    > Learning objectives
+	>
+    > Filter low counts
+	>
+    > Run differential expression with DESeq2
+	>
+    > Visualize plots and save results
+	>
+    > Chapter Quiz
 
 5. API Hosts 
 
-6. Troubleshooting Tips
+6. Troubleshooting and Tips
