@@ -1,6 +1,6 @@
 ---
 title: "AI in RStudio"
-date: "October 09, 2026"
+date: "October 11, 2026"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: book.bib
