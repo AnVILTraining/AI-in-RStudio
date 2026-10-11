@@ -13,13 +13,18 @@ favicon: assets/AnVIL_style/anvil_favicon.ico
 
 # About this Book {-}
 
+This book is a beginner's guide to getting started with AI in RStudio on AnVIL. 
+
 This book is part of a series of books for the Genomic Data Science Analysis, Visualization, and Informatics Lab-space (AnVIL) of the National Human Genome Research Institute (NHGRI). Learn more about AnVIL by visiting https://anvilproject.org or reading the [article in Cell Genomics](https://www.sciencedirect.com/science/article/pii/S2666979X21001063).
 
 ## Skills Level {-} 
 
 ::: {.notice}
-_Genetics_
-<!-- **Novice**: no genetics knowledge needed -->
+_Cloud & AI knowledge_ 
+<!--**Beginner**: prior cloud computing or local AI experiences are helpful but not required
+
+_Data Analysis_
+<!-- **Beginner**: no prior RNA-seq data analysis experience is needed -->
 
 _Programming skills_
 <!-- **Novice**: no programming experience needed -->
@@ -31,9 +36,9 @@ Please check out our full collection of AnVIL and related resources: https://hut
 
 # Learning Objectives {-}
 
-1. Provision GPU-accelerated cloud infrastructure deploy local AI models in RStudio on AnVIL.
-1. Leverage `gander` AI assistant in RStudio for context-aware data exploration and coding.
-1. Use AI prompts in `gander` to drive RNA-seq data exploration and analysis with tidyverse and DESeq2.
+1. Provision GPU-accelerated cloud infrastructure and deploy local AI models with `Ollama` in RStudio on AnVIL.
+1. Use `ellmer` to connect R to LLMs and leverage gander for context-aware data exploration and coding in RStudio on AnVIL.
+1. Use `gander` to drive RNA-seq data exploration and analysis with tidyverse and DESeq2 on AnVIL.
 
 # Table of Contents {-}
 
@@ -47,7 +52,7 @@ Please check out our full collection of AnVIL and related resources: https://hut
 	>
 	> Introduction
 	>
-	> Ethical use of AI for data analysis
+	> Ethical use of AI for Data Analysis
 	>	
 	> Methods
 	>
@@ -55,29 +60,25 @@ Please check out our full collection of AnVIL and related resources: https://hut
 
 2. Run Local Models
     
-	> Learning objectives
+	> Learning Objectives
 	>
-    > RStudio Setup with GPU on AnVIL
+    > RStudio setup with GPU on AnVIL
 	>
-    > Install Ollama server and download qwen3-coder
+    > Setup Local AI Model
 	>
-    > Connect R to the local AI server via ellmer
-	>
-    > Chapter Quiz
+	> Quiz
 
 3. Explore data with gander
 
-    > Learning objectives
+    > Learning Objectives
 	>
-    > Configure gander and setup keyboard shortcut
+    > Configure gander
 	>
-    > Good habits: using gander_peek() and requesting code explanations
+    > Import data
 	>
-    > Import the data from Google Cloud Storage 
+    > Inspect data with gander shortcut
 	>
-    > Explore RNA-seq counts and metadata with gander and Tidyverse
-	>
-    > Chapter Quiz
+    > Explore data with gander and tidyverse
 
 4. Run DESeq2 
 
@@ -88,8 +89,6 @@ Please check out our full collection of AnVIL and related resources: https://hut
     > Run differential expression with DESeq2
 	>
     > Visualize plots and save results
-	>
-    > Chapter Quiz
 
 5. API Hosts 
 
