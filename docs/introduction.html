@@ -160,9 +160,11 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="table-of-contents.html"><a href="table-of-contents.html"><i class="fa fa-check"></i>Table of Contents</a></li>
 <li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#motivation"><i class="fa fa-check"></i><b>1.1</b> Motivation</a></li>
-<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#target-audience"><i class="fa fa-check"></i><b>1.2</b> Target Audience</a></li>
-<li class="chapter" data-level="1.3" data-path="introduction.html"><a href="introduction.html#curriculum"><i class="fa fa-check"></i><b>1.3</b> Curriculum</a></li>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#welcome"><i class="fa fa-check"></i><b>1.1</b> Welcome</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#motivation"><i class="fa fa-check"></i><b>1.2</b> Motivation</a></li>
+<li class="chapter" data-level="1.3" data-path="introduction.html"><a href="introduction.html#target-audience"><i class="fa fa-check"></i><b>1.3</b> Target Audience</a></li>
+<li class="chapter" data-level="1.4" data-path="introduction.html"><a href="introduction.html#curriculum"><i class="fa fa-check"></i><b>1.4</b> Curriculum</a></li>
+<li class="chapter" data-level="1.5" data-path="introduction.html"><a href="introduction.html#abstract"><i class="fa fa-check"></i><b>1.5</b> Abstract</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="run-local-models.html"><a href="run-local-models.html"><i class="fa fa-check"></i><b>2</b> Run Local Models</a>
 <ul>
@@ -251,16 +253,30 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="introduction" class="section level1 hasAnchor" number="1">
 <h1><span class="header-section-number">Chapter 1</span> Introduction<a href="introduction.html#introduction" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="motivation" class="section level2 hasAnchor" number="1.1">
-<h2><span class="header-section-number">1.1</span> Motivation<a href="introduction.html#motivation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="welcome" class="section level2 hasAnchor" number="1.1">
+<h2><span class="header-section-number">1.1</span> Welcome<a href="introduction.html#welcome" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Welcome to gander-assisted data analysis in RStudio on AnVIL. This course shows you how to utilize Large Language Models (LLMs) inside your RStudio environment on AnVIL.</p>
 </div>
-<div id="target-audience" class="section level2 hasAnchor" number="1.2">
-<h2><span class="header-section-number">1.2</span> Target Audience<a href="introduction.html#target-audience" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="motivation" class="section level2 hasAnchor" number="1.2">
+<h2><span class="header-section-number">1.2</span> Motivation<a href="introduction.html#motivation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Adding an AI assistant normally means exposing your data and code to a third-party API provider. On <strong>AnVIL</strong>, you can run a model locally on your own provisioned cloud instance using <strong>Ollama</strong>, connect to it in R using <strong>ellmer</strong>, and leverage <strong>gander</strong> as an in-session coding partner. This approach ensures complete data privacy and no sensitive information leaving your environment.</p>
+</div>
+<div id="target-audience" class="section level2 hasAnchor" number="1.3">
+<h2><span class="header-section-number">1.3</span> Target Audience<a href="introduction.html#target-audience" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The course is intended for …</p>
 </div>
-<div id="curriculum" class="section level2 hasAnchor" number="1.3">
-<h2><span class="header-section-number">1.3</span> Curriculum<a href="introduction.html#curriculum" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The course covers…</p>
+<div id="curriculum" class="section level2 hasAnchor" number="1.4">
+<h2><span class="header-section-number">1.4</span> Curriculum<a href="introduction.html#curriculum" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Chapter 1: <strong>Introduction</strong>.</p>
+<p>Chapter 2: <strong>Run Local Models. Provision a GPU-accelerated RStudio environment on AnVIL, launch a local </strong>Ollama** server, and download the <code>qwen3-coder:30b</code> model.</p>
+<p>Chapter 3: <strong>Explore with gander</strong>. Configure <code>gander</code>, set up keyboard shortcuts, inspect data workflows using gander_peek(), and import the airway dataset from Google Cloud Storage.</p>
+<p>Chapter 4: <strong>Run DESeq2</strong>. Filter low counts, execute differential expression analysis, and visualize biological results.</p>
+</div>
+<div id="abstract" class="section level2 hasAnchor" number="1.5">
+<h2><span class="header-section-number">1.5</span> Abstract<a href="introduction.html#abstract" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>This workshop puts an open-source large language model directly inside RStudio on AnVIL, running on the same cloud instance as your analysis. There are no paid APIs to configure, no keys to leak, and no data leaving your environment.</p>
+<p>Using <strong>gander</strong> an RStudio assistant, your session context - active environment objects, data frame column structures, and surrounding code - is passed seamlessly to an <strong>ellmer</strong> chat connected locally via <strong>Ollama</strong>. The workflow uses the ‘airway’ dataset (smooth muscle cells, four cell lines, treated with dexamethasone or untreated).</p>
+<p><strong>Keywords</strong>: AI-assisted data analysis, gander, ellmer, Ollama, AnVIL, large language models, reproducible research, RNA-seq, DESeq2, genomic data science education</p>
 
 </div>
 </div>
