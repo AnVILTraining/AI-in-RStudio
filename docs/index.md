@@ -21,13 +21,13 @@ This book is part of a series of books for the Genomic Data Science Analysis, Vi
 
 ::: {.notice}
 _Cloud & AI knowledge_ 
-**Beginner**: prior cloud computing or local AI experiences are helpful but not required
+<!-- **Beginner**: prior cloud computing or local AI experiences are helpful but not required -->
 
 _Data Analysis_
-**Beginner**: no prior RNA-seq data analysis experience is needed
+<!-- **Beginner**: no prior RNA-seq data analysis experience is needed -->
 
 _Programming skills_
-**Novice**: no programming experience needed
+<!-- **Novice**: no programming experience needed -->
 :::
 
 ## AnVIL Collection {-}
