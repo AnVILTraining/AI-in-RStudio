@@ -1,7 +1,9 @@
 introduction
+welcome
 motivation
 target-audience
 curriculum
+abstract
 run-local-models
 learning-objectives-1
 rstudio-setup-with-gpu-on-anvil
