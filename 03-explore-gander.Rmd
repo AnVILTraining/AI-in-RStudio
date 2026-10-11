@@ -291,7 +291,7 @@ Leverage gander to break down unfamiliar logic, functions, or script sections di
 >
 > **PROMPT**: Briefly explain this code
 
-***sample gander output***
+***sample gander output***:
 
 ```text
 This code calculates summary statistics (mean, standard deviation, minimum, and maximum) for all columns in the counts data frame. 
@@ -318,14 +318,13 @@ metadata
 >
 > **PROMPT**: List all variables in my metadata
 
-***sample gander output***
+***sample gander output***:
 
 ```text
 SampleName, cell, dex, albut, Run, avgLength, Experiment, Sample, BioSample
 ```
 
 ### Quiz
-
 
 1. **When you highlight the object name ‘counts’ in your R script and invoke ‘gander’ with the prompt ‘View counts’, how does gander =generate a meaningful output?**
 
@@ -345,7 +344,7 @@ Correct Answer: C (gander leverages Integrated environment context integration, 
 ### Install and Load Required Packages
 
 
-Run the following code in the R Console
+Run the following code in the R Console:
 
 ```{r, eval=FALSE}
 # Common R tools for data manipulation and analysis
@@ -361,7 +360,7 @@ library(tidyverse)
 >
 > **PROMPT**: Explore my counts file with tydiverse
 
-***sample gander output***
+***sample gander output***:
 
 ```{r, eval=FALSE}
   counts %>%
@@ -394,7 +393,7 @@ After running the above code, here is the output:
 >
 > **PROMPT**: What is the library size of each sample? Use tidyverse
 
-***sample gander output***
+***sample gander output***:
 
 ```{r, eval=FALSE}
   counts %>%
@@ -431,7 +430,7 @@ counts %>%
 
 > **PROMPT**: Minimally annotate this code line by line
 
-***sample gander output***
+***sample gander output***:
 
 ```text
 # Sum rows to get total counts per gene
@@ -447,7 +446,7 @@ counts %>%
 >
 > **PROMPT**: Explore my metadata file with tydiverse
 
-***sample gander output***
+***sample gander output***:
 
 ```{r, eval=FALSE}
 metadata %>% 
@@ -482,7 +481,7 @@ After running this code, here is the output:
 >
 > **PROMPT**: How does avg_length compare between treated and untreated conditions? Use tidyverse
 
-***sample gander output***
+***sample gander output***:
 
 ```{r, eval=FALSE}
 metadata %>%
@@ -490,6 +489,15 @@ metadata %>%
   summarize(avg_length = mean(avgLength))
 ```
 
+After running this code, here is the output:
+
+```text
+# A tibble: 2 × 2
+  dex   avg_length
+  <chr>      <dbl>
+1 trt         109.
+2 untrt       118.
+```
 
 ### Quiz
 
