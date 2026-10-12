@@ -1,2 +1,81 @@
+```{r, include = FALSE}
+ottrpal::set_knitr_image_path()
+```
+
 # Run DESeq2
+
+Perform bulk RNA-seq Differential Expression analysis with local AI, gander, and DESeq2
+
+<br>
+
+## Learning objectives
+
+1. Perform pre-filtering on a raw count matrix to optimize performance and visualization
+1. Execute a standard differential expression analysis using DESeq2
+1. Explore and visualize results
+
+## Filter low counts
+
+### Install and Load Required Packages
+
+Run the following code in the R Console:
+
+```{r, eval=FALSE}
+# Bioconductor packages
+BiocManager::install("DESeq2")
+library(DESeq2)
+```
+
+### Filter genes with low counts
+
+Filtering low-count genes before using DESeq2 is optional, but it is a standard practice that helps optimize performance and clean up graphical outputs. 
+For example, eliminating genes with few or no reads reduces the memory size of the data object, speeds up count modeling and improves noisiness in visual representations. 
+
+1. Retain genes with a total count of at least 1 across all samples. In a clean R Script:
+
+> **HIGHLIGHT**: `counts`
+>
+> **PROMPT**: Filter genes with ≥ 1 counts in all samples and create a new filtered counts object
+
+***sample gander output***:
+
+```{r, eval=FALSE}
+counts_filtered <- counts[rowSums(counts >= 1) == ncol(counts), ]
+```
+
+2. Check for presence of zero counts
+
+> **HIGHLIGHT**: `counts_filtered`
+>
+> **PROMPT**: Are there any genes with zero counts?
+
+***sample gander output***:
+
+```{r, eval=FALSE}
+any(colSums(counts_filtered == 0) > 0)
+```
+
+3. Compare counts to filtered counts
+
+> **HIGHLIGHT**: both, `counts` and `counts_filtered`
+>
+> **PROMPT**: Summarize counts_filtered and compare to counts
+
+```{r, fig.align='center', out.width="100%", echo = FALSE}
+ottrpal::include_slide("https://docs.google.com/presentation/d/1zrqf2fLtglxi5l1qx5GCaRlDkKR8ZFp-ldmlqtqWGZg/edit?slide=id.h324ef5e179219b9e_0_52#slide=id.h324ef5e179219b9e_0_52")
+```
+
+***sample gander output***:
+
+```{r, eval=FALSE}
+summary(counts_filtered)
+summary(counts)
+```
+
+## Run Differential expression analysis with DEseq2
+
+
+
+
+
 
