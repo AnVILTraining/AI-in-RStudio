@@ -1,10 +1,10 @@
 url	chapt_title	img_path
-http://training.anvilproject.org/AI-in-RStudio/index.html	About this Book	./resources/chapt_screen_images/index.png
-http://training.anvilproject.org/AI-in-RStudio/learning-objectives.html	Learning Objectives	./resources/chapt_screen_images/learning-objectives.png
-http://training.anvilproject.org/AI-in-RStudio/table-of-contents.html	Table of Contents	./resources/chapt_screen_images/table-of-contents.png
-http://training.anvilproject.org/AI-in-RStudio/introduction.html	1 Introduction	./resources/chapt_screen_images/introduction.png
-http://training.anvilproject.org/AI-in-RStudio/run-local-models.html	2 Run Local Models	./resources/chapt_screen_images/run-local-models.png
-http://training.anvilproject.org/AI-in-RStudio/explore-data-with-gander.html	3 Explore data with gander	./resources/chapt_screen_images/explore-data-with-gander.png
-http://training.anvilproject.org/AI-in-RStudio/run-deseq2.html	4 Run DESeq2	./resources/chapt_screen_images/run-deseq2.png
-http://training.anvilproject.org/AI-in-RStudio/about-the-authors.html	About the Authors	./resources/chapt_screen_images/about-the-authors.png
-http://training.anvilproject.org/AI-in-RStudio/references.html	5 References	./resources/chapt_screen_images/references.png
+https://training.anvilproject.org/AI-in-RStudio/index.html	About this Book	./resources/chapt_screen_images/index.png
+https://training.anvilproject.org/AI-in-RStudio/learning-objectives.html	Learning Objectives	./resources/chapt_screen_images/learning-objectives.png
+https://training.anvilproject.org/AI-in-RStudio/table-of-contents.html	Table of Contents	./resources/chapt_screen_images/table-of-contents.png
+https://training.anvilproject.org/AI-in-RStudio/introduction.html	1 Introduction	./resources/chapt_screen_images/introduction.png
+https://training.anvilproject.org/AI-in-RStudio/run-local-models.html	2 Run Local Models	./resources/chapt_screen_images/run-local-models.png
+https://training.anvilproject.org/AI-in-RStudio/explore-data-with-gander.html	3 Explore data with gander	./resources/chapt_screen_images/explore-data-with-gander.png
+https://training.anvilproject.org/AI-in-RStudio/run-deseq2.html	4 Run DESeq2	./resources/chapt_screen_images/run-deseq2.png
+https://training.anvilproject.org/AI-in-RStudio/about-the-authors.html	About the Authors	./resources/chapt_screen_images/about-the-authors.png
+https://training.anvilproject.org/AI-in-RStudio/references.html	5 References	./resources/chapt_screen_images/references.png
