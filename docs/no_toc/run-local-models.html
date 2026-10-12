@@ -254,6 +254,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div id="run-local-models" class="section level1 hasAnchor" number="2">
 <h1><span class="header-section-number">Chapter 2</span> Run Local Models<a href="run-local-models.html#run-local-models" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Running Local AI Models with RStudio and Ollama</p>
+<p><br></p>
 <div id="learning-objectives-1" class="section level2 hasAnchor" number="2.1">
 <h2><span class="header-section-number">2.1</span> Learning Objectives<a href="run-local-models.html#learning-objectives-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ol style="list-style-type: decimal">
@@ -406,6 +407,12 @@ Alternatively, you could code explicitly: `<code>chat &lt;- ellmer::chat_ollama(
 <li>Test the connection by asking AI a question</li>
 </ol>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="run-local-models.html#cb7-1" tabindex="-1"></a>chat<span class="sc">$</span><span class="fu">chat</span>(<span class="st">&quot;Tell me one short fact about human genome&quot;</span>)</span></code></pre></div>
+<div class="notice">
+<p><strong>NOTE</strong>
+- The first response may take more than a minute (subsequent responses will be faster). You can check by running the same test prompt a second time and noting the increase in the speed of the response.</p>
+<p><strong>TIP</strong>
+- If the first prompt response is taking too long, STOP the command and then re-run it. This will typically fix the response hold-up.</p>
+</div>
 </div>
 <div id="quiz" class="section level3 hasAnchor" number="2.3.3">
 <h3><span class="header-section-number">2.3.3</span> Quiz<a href="run-local-models.html#quiz" class="anchor-section" aria-label="Anchor link to header"></a></h3>
