@@ -100,7 +100,7 @@ dds <- DESeqDataSetFromMatrix(countData = counts_filtered,
 
 dds <- DESeq(dds)
 
-results <- results(dds, contrast = c("dex", "trt", "untrt")
+results <- results(dds, contrast = c("dex", "trt", "untrt"))
 ```
 
 ### Inspect and Summarize Results
@@ -254,7 +254,7 @@ dev.off()
 ottrpal::include_slide("https://docs.google.com/presentation/d/1zrqf2fLtglxi5l1qx5GCaRlDkKR8ZFp-ldmlqtqWGZg/edit?slide=id.h324ef5e179219b9e_0_88#slide=id.h324ef5e179219b9e_0_88")
 ```
 
-or, AI may also choose to build an MA plot using ggplot2 directly: 
+--- or, AI may also choose to build an MA plot using ggplot2: 
 
 ```{r, eval=FALSE}
 library(ggplot2)
