@@ -4,6 +4,8 @@
 
 Running Local AI Models with RStudio and Ollama
 
+<br>
+
 ## Learning Objectives
 
 1. Provision infrastructure: Configure and launch a GPU-accelerated RStudio environment on AnVIL.
@@ -148,6 +150,14 @@ Alternatively, you could code explicitly: ``chat <- ellmer::chat_ollama(...)`.
 ``` r
 chat$chat("Tell me one short fact about human genome")
 ```
+
+::: {.notice}
+**NOTE**
+- The first response may take more than a minute (subsequent responses will be faster). You can check by running the same test prompt a second time and noting the increase in the speed of the response.
+
+**TIP**
+- If the first prompt response is taking too long, STOP the command and then re-run it. This will typically fix the response hold-up.
+:::
 
 ### Quiz
 
