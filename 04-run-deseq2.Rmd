@@ -303,7 +303,7 @@ ggplot(results_df, aes(x = log2FoldChange, y = -log10(padj))) +
 
 ```{r, fig.align='center', out.width="100%", echo = FALSE}
 ottrpal::include_slide("https://docs.google.com/presentation/d/1zrqf2fLtglxi5l1qx5GCaRlDkKR8ZFp-ldmlqtqWGZg/edit?slide=id.h324ef5e179219b9e_0_83#slide=id.h324ef5e179219b9e_0_83")
-
+```
 
 2. Save results as a .csv file
 
@@ -318,5 +318,6 @@ In a clean R Script:
 ```{r, eval=FALSE}
 as.data.frame(results) %>% write.csv("results.csv", row.names = FALSE)
 ```
+
 Note: `row.names = TRUE` is typically preferred for DESeq2 outputs so that gene identifiers are preserved in the first column of the CSV file).
 
