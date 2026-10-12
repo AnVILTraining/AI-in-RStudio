@@ -196,7 +196,7 @@ results %>%
 
 ### Filter results based on padj value
 
-1.
+1. Filter to keep only statistically significant results based on a modified adjusted p-value threshold.
 
 In a clean R Script: 
 
@@ -211,14 +211,14 @@ filtered_results <- results[results$padj < 0.05, ]
 ```
 
 ::: {.warning}
-Error! Look out!
+ERROR!
 :::
 
-2. Troubleshoot and error
+2. Troubleshoot an error
 
-When running code above, `filtered_results <- results[results$padj < 0.05, ]`, there is an error: `Error: logical subscript contains NAs.`
+When running code above, `filtered_results <- results[results$padj < 0.05, ]`, there is an error: *Error: logical subscript contains NAs.*
 
-- To troubleshoot this error, highlight both, the code and the error message and feed both to gander:
+To troubleshoot this error, highlight both, the code and the error message and feed both to gander:
 
 ```{r, fig.align='center', out.width="100%", echo = FALSE}
 ottrpal::include_slide("https://docs.google.com/presentation/d/1zrqf2fLtglxi5l1qx5GCaRlDkKR8ZFp-ldmlqtqWGZg/edit?slide=id.h324ef5e179219b9e_0_93#slide=id.h324ef5e179219b9e_0_93")
@@ -233,7 +233,7 @@ filtered_results <- results[!is.na(results$padj)&results$padj < 0.05, ]
 
 ### Visualize an MA plot
 
-1. 
+1. Generate and saves an MA plot to visualize differential gene expression data.
 
 In a clean R Script: 
 
@@ -259,7 +259,7 @@ or, AI may also choose to build an MA plot using ggplot2 directly:
 ```{r, eval=FALSE}
 library(ggplot2)
 results_df <- as.data.frame(results)
-results_dfsignificant<-resultsdfpadj < 0.05
+results_df$significant<-results_df$padj < 0.05
 ggplot(results_df, aes(x = baseMean, y = log2FoldChange, color = significant)) +
   geom_point(alpha = 0.6) +
   scale_x_log10() +
@@ -275,7 +275,7 @@ ottrpal::include_slide("https://docs.google.com/presentation/d/1zrqf2fLtglxi5l1q
 
 ### Visualize a volcano plot
 
-1. 
+1. Creates a volcano plot to visualize differential gene expression.
 
 In a clean R Script: 
 
@@ -289,7 +289,7 @@ In a clean R Script:
 library(ggplot2)
 
 results_df <- as.data.frame(results)
-results_dfsignificant<-ifelse(resultsdfpadj < 0.05 & abs(results_df$log2FoldChange) > 1, 
+results_dfsignificant<-ifelse(results_df$padj < 0.05 & abs(results_df$log2FoldChange) > 1, 
                                  ifelse(results_df$log2FoldChange > 1, "Up", "Down"), "NotSignificant")
 
 ggplot(results_df, aes(x = log2FoldChange, y = -log10(padj))) +
