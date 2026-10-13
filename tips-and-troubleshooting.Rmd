@@ -20,10 +20,6 @@ Minimize context noise by opening a new `.R` script containing only what the tas
 
 Keeping the script lean prevents background code clutter from interfering with gander's responses. A long script sends the assistant a long pile of unrelated code, and the extra context does not help it answer.
 
-### Manage Global Environment Clutter
-
-Avoid keeping outdated or large data frames loaded in your workspace if you aren't using them. Periodically restart your R session **(Ctrl + Shift + F10 in RStudio)** or use `rm()` to keep your active environment lean.
-
 ### Use gander_peek() Often
 
 Because gander automatically packages your surrounding script, cursor position, and active R environment into a prompt behind the scenes, you might occasionally wonder what exactly it is sending to the model. You can inspect the exact payload using `gander_peek()` right after running your gander add-in.
@@ -70,28 +66,76 @@ Examine token usage in R Console:
 
 Here, the significant jump in input tokens (from 927 to 2,278) is primarily driven by the extra dataset, though the longer prompt and model reasoning overhead also contributed to the increased token count.
 
+### Manage Global Environment Clutter
 
-### Save scripts**
+#### Keep Active Workspace Lean
 
-Always write and save your code inside a saved .R script or Markdown document rather than typing directly into the interactive R Console.
-  
-- Save early and often.
-- Restarting R or resetting a chat session will wipe in-memory R objects, but your written code on disk remains completely safe. Having a clean, executable script allows you to re-run your analysis up to your current working step in seconds.
+Periodically,  cleanup unneeded data, or restart your R session entirely to maintain a lean environment:
 
-You may also need to **Save intermediate and final data objects to Disk**:
+**Remove specific objects**: 
 
-For computationally heavy bioinformatics objects (e.g., large DESeqDataSet objects or filtered count matrices), save intermediate milestones to disk if necessary.
+- Use `rm()` to clean up large temporary variables or obsolete intermediate data frames:
+
+Example: 
+
+```{r, eval=FALSE}
+# Remove temporary variables
+rm(counts_filtered)
+```
+
+**Restart R Session (Nuclear Option)**: 
+
+The most effective way to clear both global environment clutter and gander's internal chat history is a full session restart:
+
+- Keyboard Shortcut: Cmd + Shift + F10 (Mac).
+- RStudio Menu: Go to **Session**, then **Restart R**.
+
+::: {.warning}
+What happens when you restart R?
+
+Restarting R clears all in-memory R objects (e.g. counts, metadata, dds) from the Environment pane and resets gander's active conversation history. However, your saved scripts and files on disk remain 100% safe.
+:::
+
+
+### Save Scripts 
+
+- **Save early and often while coding**. Write reproducible code and structure your workflow in a **saved .R script** or R Markdown document rather than relying on interactive console commands.
+- **Write reproducible pipelines**. Ensure your `.R` script or R Markdown document contains every step necessary to rebuild your environment from scratch—from loading libraries to reading raw data.
+
+::: {.reflection}
+Consider this! Restarting R will wipe in-memory R objects, but your written code on disk remains completely safe. Having a clean, executable script allows you to re-run your analysis up to your current working step in seconds.
+::: 
+
+### Save Files
+
+To avoid re-running time-consuming computational steps (like normalization, alignment, or differential expression testing), consider saving milestone data analysis files to disk:
 
 Example:
 
 ```{r, eval=FALSE}
 # Save filtered counts or results to CSV
 write.csv(counts_filtered, file = "counts_filtered.csv", row.names = TRUE)
-write.csv(res_de, file = "results/DESeq2_results.csv", row.names = TRUE)
 
 # Reload tabular data
 counts_filtered <- read.csv("counts_filtered.csv", row.names = 1)
 ```
+
+::: {.reflection}
+Saving key datasets to disk prevents you from needing to re-run time-consuming upstream pipeline steps every time you restart R to clear model context noise or fix an environment issue.
+:::
+
+**Note**:
+
+Plain (e.g. CSV) files cannot store complex internal structures. For S4 classes like DESeqDataSet (dds), save them as .rds files to preserve all design formulas, dispersion estimates, and sample colData intact:
+
+Example:
+
+```
+# Save complex DESeq2's dds object
+saveRDS(dds, file = "dds.rds")
+
+# Reload the full S4 object intact after a session reset
+dds <- readRDS("dds.rds")
 
 ## Troubleshooting
 
