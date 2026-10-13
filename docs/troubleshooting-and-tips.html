@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Troubleshooting and Tips | AI in RStudio</title>
+  <meta name="description" content="Description about Course/Book." />
+  <meta name="generator" content="bookdown 0.46 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Troubleshooting and Tips | AI in RStudio" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Description about Course/Book." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Troubleshooting and Tips | AI in RStudio" />
+  
+  <meta name="twitter:description" content="Description about Course/Book." />
+  
+
+
+
+<meta name="date" content="2026-10-13" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  <link rel="shortcut icon" href="assets/AnVIL_style/anvil_favicon.ico" type="image/x-icon" />
+<link rel="prev" href="run-deseq2.html"/>
+<link rel="next" href="about-the-authors.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+  
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id={MeasurementID}"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '{MeasurementID}');
+</script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #204a87; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #8f5902; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #204a87; font-weight: bold; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #ce5c00; font-weight: bold; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="assets/style_config_default.css" type="text/css" />
+<link rel="stylesheet" href="assets/AnVIL_style/style_config_AnVIL.css" type="text/css" />
+<link rel="stylesheet" href="assets/style.css" type="text/css" />
+<link rel="stylesheet" href="assets/AnVIL_Template/AnVIL_Template.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<a href="https://anvilproject.org/" target="_blank"><img src="assets/AnVIL_style/logo-anvil.png" style="width: 80%; padding-left: 15px; padding-top: 8px;"</a>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>About this Book</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#skills-level"><i class="fa fa-check"></i>Skills Level</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#anvil-collection"><i class="fa fa-check"></i>AnVIL Collection</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="learning-objectives.html"><a href="learning-objectives.html"><i class="fa fa-check"></i>Learning Objectives</a></li>
+<li class="chapter" data-level="" data-path="table-of-contents.html"><a href="table-of-contents.html"><i class="fa fa-check"></i>Table of Contents</a></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#welcome"><i class="fa fa-check"></i><b>1.1</b> Welcome</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#motivation"><i class="fa fa-check"></i><b>1.2</b> Motivation</a></li>
+<li class="chapter" data-level="1.3" data-path="introduction.html"><a href="introduction.html#target-audience"><i class="fa fa-check"></i><b>1.3</b> Target Audience</a></li>
+<li class="chapter" data-level="1.4" data-path="introduction.html"><a href="introduction.html#curriculum"><i class="fa fa-check"></i><b>1.4</b> Curriculum</a></li>
+<li class="chapter" data-level="1.5" data-path="introduction.html"><a href="introduction.html#abstract"><i class="fa fa-check"></i><b>1.5</b> Abstract</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="run-local-models.html"><a href="run-local-models.html"><i class="fa fa-check"></i><b>2</b> Run Local Models</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="run-local-models.html"><a href="run-local-models.html#learning-objectives-1"><i class="fa fa-check"></i><b>2.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="2.2" data-path="run-local-models.html"><a href="run-local-models.html#rstudio-setup-with-gpu-on-anvil"><i class="fa fa-check"></i><b>2.2</b> RStudio Setup with GPU on AnVIL</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="run-local-models.html"><a href="run-local-models.html#open-the-workspace-and-configure-compute-settings"><i class="fa fa-check"></i><b>2.2.1</b> Open the workspace and configure compute settings</a></li>
+<li class="chapter" data-level="2.2.2" data-path="run-local-models.html"><a href="run-local-models.html#launch-rstudio"><i class="fa fa-check"></i><b>2.2.2</b> Launch RStudio</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="run-local-models.html"><a href="run-local-models.html#setup-local-ai-model"><i class="fa fa-check"></i><b>2.3</b> Setup Local AI model</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="run-local-models.html"><a href="run-local-models.html#install-ollama-server-and-download-the-model"><i class="fa fa-check"></i><b>2.3.1</b> Install Ollama server and download the model</a></li>
+<li class="chapter" data-level="2.3.2" data-path="run-local-models.html"><a href="run-local-models.html#connect-r-to-the-local-ai-server"><i class="fa fa-check"></i><b>2.3.2</b> Connect R to the local AI server</a></li>
+<li class="chapter" data-level="2.3.3" data-path="run-local-models.html"><a href="run-local-models.html#quiz"><i class="fa fa-check"></i><b>2.3.3</b> Quiz</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="explore-data-with-gander.html"><a href="explore-data-with-gander.html"><i class="fa fa-check"></i><b>3</b> Explore data with gander</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="explore-data-with-gander.html"><a href="explore-data-with-gander.html#learning-objectives-2"><i class="fa fa-check"></i><b>3.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="3.2" data-path="explore-data-with-gander.html"><a href="explore-data-with-gander.html#configure-gander"><i class="fa fa-check"></i><b>3.2</b> Configure gander</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="explore-data-with-gander.html"><a href="explore-data-with-gander.html#install-and-load-required-packages"><i class="fa fa-check"></i><b>3.2.1</b> Install and load required packages</a></li>
+<li class="chapter" data-level="3.2.2" data-path="explore-data-with-gander.html"><a href="explore-data-with-gander.html#configure-ganders-chat-model"><i class="fa fa-check"></i><b>3.2.2</b> Configure gander’s chat model</a></li>
+<li class="chapter" data-level="3.2.3" data-path="explore-data-with-gander.html"><a href="explore-data-with-gander.html#setup-keyboard-shortcut-for-gander"><i class="fa fa-check"></i><b>3.2.3</b> Setup keyboard shortcut for gander</a></li>
+<li class="chapter" data-level="3.2.4" data-path="explore-data-with-gander.html"><a href="explore-data-with-gander.html#test-gander-shortcut"><i class="fa fa-check"></i><b>3.2.4</b> Test gander shortcut</a></li>
+<li class="chapter" data-level="3.2.5" data-path="explore-data-with-gander.html"><a href="explore-data-with-gander.html#quiz-1"><i class="fa fa-check"></i><b>3.2.5</b> Quiz</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="explore-data-with-gander.html"><a href="explore-data-with-gander.html#import-data"><i class="fa fa-check"></i><b>3.3</b> Import Data</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="explore-data-with-gander.html"><a href="explore-data-with-gander.html#install-and-load-required-packages-1"><i class="fa fa-check"></i><b>3.3.1</b> Install and load required packages</a></li>
+<li class="chapter" data-level="3.3.2" data-path="explore-data-with-gander.html"><a href="explore-data-with-gander.html#import-data-from-google-cloud-storage"><i class="fa fa-check"></i><b>3.3.2</b> Import data from Google Cloud Storage</a></li>
+<li class="chapter" data-level="3.3.3" data-path="explore-data-with-gander.html"><a href="explore-data-with-gander.html#load-data-into-r"><i class="fa fa-check"></i><b>3.3.3</b> Load Data into R</a></li>
+<li class="chapter" data-level="3.3.4" data-path="explore-data-with-gander.html"><a href="explore-data-with-gander.html#quiz-2"><i class="fa fa-check"></i><b>3.3.4</b> Quiz</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="explore-data-with-gander.html"><a href="explore-data-with-gander.html#inspect-data-with-gander-shortcut"><i class="fa fa-check"></i><b>3.4</b> Inspect data with gander shortcut</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="explore-data-with-gander.html"><a href="explore-data-with-gander.html#inspect-counts-file"><i class="fa fa-check"></i><b>3.4.1</b> Inspect counts file</a></li>
+<li class="chapter" data-level="3.4.2" data-path="explore-data-with-gander.html"><a href="explore-data-with-gander.html#inspect-metadata-file-with-gander-shortcut"><i class="fa fa-check"></i><b>3.4.2</b> Inspect metadata file with gander shortcut</a></li>
+<li class="chapter" data-level="3.4.3" data-path="explore-data-with-gander.html"><a href="explore-data-with-gander.html#quiz-3"><i class="fa fa-check"></i><b>3.4.3</b> Quiz</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="explore-data-with-gander.html"><a href="explore-data-with-gander.html#explore-data-with-gander-and-tydiverse"><i class="fa fa-check"></i><b>3.5</b> Explore data with gander and tydiverse</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="explore-data-with-gander.html"><a href="explore-data-with-gander.html#install-and-load-required-packages-2"><i class="fa fa-check"></i><b>3.5.1</b> Install and Load Required Packages</a></li>
+<li class="chapter" data-level="3.5.2" data-path="explore-data-with-gander.html"><a href="explore-data-with-gander.html#explore-counts-file-with-gander-and-tidyverse"><i class="fa fa-check"></i><b>3.5.2</b> Explore counts file with gander and tidyverse</a></li>
+<li class="chapter" data-level="3.5.3" data-path="explore-data-with-gander.html"><a href="explore-data-with-gander.html#explore-metadata-file-with-gander-and-tidyverse"><i class="fa fa-check"></i><b>3.5.3</b> Explore metadata file with gander and tidyverse</a></li>
+<li class="chapter" data-level="3.5.4" data-path="explore-data-with-gander.html"><a href="explore-data-with-gander.html#quiz-4"><i class="fa fa-check"></i><b>3.5.4</b> Quiz</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="run-deseq2.html"><a href="run-deseq2.html"><i class="fa fa-check"></i><b>4</b> Run DESeq2</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="run-deseq2.html"><a href="run-deseq2.html#learning-objectives-3"><i class="fa fa-check"></i><b>4.1</b> Learning objectives</a></li>
+<li class="chapter" data-level="4.2" data-path="run-deseq2.html"><a href="run-deseq2.html#filter-low-counts"><i class="fa fa-check"></i><b>4.2</b> Filter low counts</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="run-deseq2.html"><a href="run-deseq2.html#install-and-load-required-packages-3"><i class="fa fa-check"></i><b>4.2.1</b> Install and Load Required Packages</a></li>
+<li class="chapter" data-level="4.2.2" data-path="run-deseq2.html"><a href="run-deseq2.html#filter-genes-with-low-counts"><i class="fa fa-check"></i><b>4.2.2</b> Filter genes with low counts</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="run-deseq2.html"><a href="run-deseq2.html#run-differential-expression-analysis-with-deseq2"><i class="fa fa-check"></i><b>4.3</b> Run Differential expression analysis with DEseq2</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="run-deseq2.html"><a href="run-deseq2.html#run-deseq2-on-filtered-counts"><i class="fa fa-check"></i><b>4.3.1</b> Run DESeq2 on filtered counts</a></li>
+<li class="chapter" data-level="4.3.2" data-path="run-deseq2.html"><a href="run-deseq2.html#inspect-and-summarize-results"><i class="fa fa-check"></i><b>4.3.2</b> Inspect and Summarize Results</a></li>
+<li class="chapter" data-level="4.3.3" data-path="run-deseq2.html"><a href="run-deseq2.html#filter-results-based-on-padj-value"><i class="fa fa-check"></i><b>4.3.3</b> Filter results based on padj value</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="run-deseq2.html"><a href="run-deseq2.html#visualize-plots-and-save-results"><i class="fa fa-check"></i><b>4.4</b> Visualize plots and save results</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="run-deseq2.html"><a href="run-deseq2.html#visualize-an-ma-plot"><i class="fa fa-check"></i><b>4.4.1</b> Visualize an MA plot</a></li>
+<li class="chapter" data-level="4.4.2" data-path="run-deseq2.html"><a href="run-deseq2.html#visualize-a-volcano-plot"><i class="fa fa-check"></i><b>4.4.2</b> Visualize a volcano plot</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="troubleshooting-and-tips.html"><a href="troubleshooting-and-tips.html"><i class="fa fa-check"></i>Troubleshooting and Tips</a>
+<ul>
+<li class="chapter" data-level="4.5" data-path="troubleshooting-and-tips.html"><a href="troubleshooting-and-tips.html#tips"><i class="fa fa-check"></i><b>4.5</b> Tips</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="troubleshooting-and-tips.html"><a href="troubleshooting-and-tips.html#prompt-rule-of-thumb"><i class="fa fa-check"></i><b>4.5.1</b> Prompt rule of thumb</a></li>
+<li class="chapter" data-level="4.5.2" data-path="troubleshooting-and-tips.html"><a href="troubleshooting-and-tips.html#minimize-context-noise"><i class="fa fa-check"></i><b>4.5.2</b> Minimize Context Noise</a></li>
+<li class="chapter" data-level="4.5.3" data-path="troubleshooting-and-tips.html"><a href="troubleshooting-and-tips.html#use-gander_peek-often"><i class="fa fa-check"></i><b>4.5.3</b> Use gander_peek() Often</a></li>
+<li class="chapter" data-level="4.5.4" data-path="troubleshooting-and-tips.html"><a href="troubleshooting-and-tips.html#token-use-awareness"><i class="fa fa-check"></i><b>4.5.4</b> Token use awareness</a></li>
+<li class="chapter" data-level="4.5.5" data-path="troubleshooting-and-tips.html"><a href="troubleshooting-and-tips.html#manage-global-environment-clutter"><i class="fa fa-check"></i><b>4.5.5</b> Manage Global Environment Clutter</a></li>
+<li class="chapter" data-level="4.5.6" data-path="troubleshooting-and-tips.html"><a href="troubleshooting-and-tips.html#save-scripts"><i class="fa fa-check"></i><b>4.5.6</b> Save Scripts</a></li>
+<li class="chapter" data-level="4.5.7" data-path="troubleshooting-and-tips.html"><a href="troubleshooting-and-tips.html#save-files"><i class="fa fa-check"></i><b>4.5.7</b> Save Files</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="troubleshooting-and-tips.html"><a href="troubleshooting-and-tips.html#troubleshooting"><i class="fa fa-check"></i><b>4.6</b> Troubleshooting</a>
+<ul>
+<li class="chapter" data-level="4.6.1" data-path="troubleshooting-and-tips.html"><a href="troubleshooting-and-tips.html#missing-packages"><i class="fa fa-check"></i><b>4.6.1</b> Missing packages</a></li>
+<li class="chapter" data-level="4.6.2" data-path="troubleshooting-and-tips.html"><a href="troubleshooting-and-tips.html#gander-errors"><i class="fa fa-check"></i><b>4.6.2</b> Gander errors</a></li>
+<li class="chapter" data-level="4.6.3" data-path="troubleshooting-and-tips.html"><a href="troubleshooting-and-tips.html#local-models-limitations"><i class="fa fa-check"></i><b>4.6.3</b> Local Models limitations</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="about-the-authors.html"><a href="about-the-authors.html"><i class="fa fa-check"></i>About the Authors</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<p style="text-align:center;"> <a href="https://github.com/jhudsl/OTTR_Template" target="blank" > This content was published with</a> <a href="https://bookdown.org/" target="blank"> bookdown by: </a> </p>
+<p style="text-align:center;"> <a href="https://hutchdatascience.org/"> The Fred Hutch Data Science Lab </a></p>
+<a href="https://hutchdatascience.org/" target="_blank"><img src="https://raw.githubusercontent.com/jhudsl/OTTR_Template/main/style-sets/fhdasl/copy_to_assets/big-dasl-stacked.png" style="width: 80%; padding-left: 34px; padding-top: 8px;"</a>
+<p style="text-align:center; font-size: 12px;"> <a href="https://github.com/rstudio4edu/rstudio4edu-book/"> Style adapted from: rstudio4edu-book </a> <a href ="https://creativecommons.org/licenses/by/2.0/"> (CC-BY 2.0) </a></p>
+<p style="padding-left: 40px;"><div class="trapezoid" style = "padding-left: 40px;"><span><a href="https://docs.google.com/forms/d/e/1FAIpQLScrDVb_utm55pmb_SHx-RgELTEbCCWdLea0T3IzS0Oj00GE4w/viewform?usp=pp_url&entry.1565230805=AI+in+RStudio"> Click here to provide feedback</a> <img src="assets/itcr_arrow.png" style=" width: 10%" ></span></div></p>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">AI in RStudio</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<head>
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=10.0,initial-scale=1.0">
+  <!--script src="https://kit.fontawesome.com/6a26f47516.js"></script-->
+  <!--<script src="assets/hideOutput.js"></script>-->
+</head>
+        
+
+
+<div class="hero-image-container"> 
+  <img class= "hero-image" src="assets/AnVIL_style/dasl_thin_main_image.png">
+</div>
+<div id="troubleshooting-and-tips" class="section level1 unnumbered hasAnchor">
+<h1>Troubleshooting and Tips<a href="troubleshooting-and-tips.html#troubleshooting-and-tips" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="tips" class="section level2 hasAnchor" number="4.5">
+<h2><span class="header-section-number">4.5</span> Tips<a href="troubleshooting-and-tips.html#tips" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="prompt-rule-of-thumb" class="section level3 hasAnchor" number="4.5.1">
+<h3><span class="header-section-number">4.5.1</span> Prompt rule of thumb<a href="troubleshooting-and-tips.html#prompt-rule-of-thumb" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Keep prompts short and concrete</strong>. Rather than <em>“help me do RNA-seq”</em> (which is too broad), ask <em>“Summarize key counts file statistics in a table”</em> or <em>“Filter genes with at least 1 count in all samples”</em>.</p>
+<p><strong>Explicit Prompting</strong>. Break complex prompts into smaller, single-step instructions. Provide explicit input/output structures in your prompt or copy exact code snippets from package vignettes for the model to adapt.</p>
+</div>
+<div id="minimize-context-noise" class="section level3 hasAnchor" number="4.5.2">
+<h3><span class="header-section-number">4.5.2</span> Minimize Context Noise<a href="troubleshooting-and-tips.html#minimize-context-noise" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Minimize context noise by opening a new <code>.R</code> script containing only what the task needs:</p>
+<p><strong>Example</strong>: If you want to ask about the (airway) <code>counts</code> dataset, your new <code>.R</code> script should contain only the word <code>counts</code> corresponding to a loaded object in your RStudio environment.</p>
+<p>Keeping the script lean prevents background code clutter from interfering with gander’s responses. A long script sends the assistant a long pile of unrelated code, and the extra context does not help it answer.</p>
+</div>
+<div id="use-gander_peek-often" class="section level3 hasAnchor" number="4.5.3">
+<h3><span class="header-section-number">4.5.3</span> Use gander_peek() Often<a href="troubleshooting-and-tips.html#use-gander_peek-often" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Because gander automatically packages your surrounding script, cursor position, and active R environment into a prompt behind the scenes, you might occasionally wonder what exactly it is sending to the model. You can inspect the exact payload using <code>gander_peek()</code> right after running your gander add-in.</p>
+<p><strong>What it does</strong>: It returns the underlying ellmer chat object from your most recent interaction as-is. <code>gander_peek()</code> will always show you the exact context summary from your immediately preceding request.</p>
+<p><strong>Debugging context</strong>: If a model misunderstands your workspace or gives unexpected code, running <code>gander_peek()</code> lets you check whether your data frame structures, package versions, or script snippets were correctly intercepted and passed along.</p>
+</div>
+<div id="token-use-awareness" class="section level3 hasAnchor" number="4.5.4">
+<h3><span class="header-section-number">4.5.4</span> Token use awareness<a href="troubleshooting-and-tips.html#token-use-awareness" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>To track your active session’s token consumption, in RStudio:</p>
+<pre><code>ellmer::token_usage()</code></pre>
+<p><strong>Example 1</strong>: After this interaction with gander</p>
+<blockquote>
+<p>HIGHLIGHT: counts_filtered</p>
+<p>PROMPT: Are there any genes with zero counts?</p>
+</blockquote>
+<p>Examine token usage in R Console:</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="troubleshooting-and-tips.html#cb49-1" tabindex="-1"></a><span class="sc">&gt;</span> ellmer<span class="sc">::</span><span class="fu">token_usage</span>()</span>
+<span id="cb49-2"><a href="troubleshooting-and-tips.html#cb49-2" tabindex="-1"></a>  provider           model input output cached_input price</span>
+<span id="cb49-3"><a href="troubleshooting-and-tips.html#cb49-3" tabindex="-1"></a><span class="dv">1</span>   Ollama qwen3<span class="sc">-</span>coder<span class="sc">:</span>30b   <span class="dv">927</span>     <span class="dv">37</span>            <span class="dv">0</span>    <span class="cn">NA</span></span></code></pre></div>
+<p><strong>Example 2</strong>: After this interaction with gander</p>
+<blockquote>
+<p>HIGHLIGHT: both, <code>counts</code> and <code>counts_filtered</code></p>
+<p>PROMPT: Summarize counts_filtered and compare to counts</p>
+</blockquote>
+<p>Examine token usage in R Console:</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="troubleshooting-and-tips.html#cb50-1" tabindex="-1"></a><span class="sc">&gt;</span> ellmer<span class="sc">::</span><span class="fu">token_usage</span>()</span>
+<span id="cb50-2"><a href="troubleshooting-and-tips.html#cb50-2" tabindex="-1"></a>  provider           model input output cached_input price</span>
+<span id="cb50-3"><a href="troubleshooting-and-tips.html#cb50-3" tabindex="-1"></a><span class="dv">1</span>   Ollama qwen3<span class="sc">-</span>coder<span class="sc">:</span>30b  <span class="dv">2278</span>     <span class="dv">79</span>            <span class="dv">0</span>    <span class="cn">NA</span></span></code></pre></div>
+<p>Here, the significant jump in input tokens (from 927 to 2,278) is primarily driven by the extra dataset, though the longer prompt and model reasoning overhead also contributed to the increased token count.</p>
+</div>
+<div id="manage-global-environment-clutter" class="section level3 hasAnchor" number="4.5.5">
+<h3><span class="header-section-number">4.5.5</span> Manage Global Environment Clutter<a href="troubleshooting-and-tips.html#manage-global-environment-clutter" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="keep-active-workspace-lean" class="section level4 hasAnchor" number="4.5.5.1">
+<h4><span class="header-section-number">4.5.5.1</span> Keep Active Workspace Lean<a href="troubleshooting-and-tips.html#keep-active-workspace-lean" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Periodically, cleanup unneeded data, or restart your R session entirely to maintain a lean environment:</p>
+<p><strong>Remove specific objects</strong>:</p>
+<ul>
+<li>Use <code>rm()</code> to clean up large temporary variables or obsolete intermediate data frames:</li>
+</ul>
+<p>Example:</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="troubleshooting-and-tips.html#cb51-1" tabindex="-1"></a><span class="co"># Remove temporary variables</span></span>
+<span id="cb51-2"><a href="troubleshooting-and-tips.html#cb51-2" tabindex="-1"></a><span class="fu">rm</span>(counts_filtered)</span></code></pre></div>
+<p><strong>Restart R Session (Nuclear Option)</strong>:</p>
+<p>The most effective way to clear both global environment clutter and gander’s internal chat history is a full session restart:</p>
+<ul>
+<li>Keyboard Shortcut: Cmd + Shift + F10 (Mac).</li>
+<li>RStudio Menu: Go to <strong>Session</strong>, then <strong>Restart R</strong>.</li>
+</ul>
+<div class="warning">
+<p>What happens when you restart R?</p>
+<p>Restarting R clears all in-memory R objects (e.g. counts, metadata, dds) from the Environment pane and resets gander’s active conversation history. However, your saved scripts and files on disk remain 100% safe.</p>
+</div>
+</div>
+</div>
+<div id="save-scripts" class="section level3 hasAnchor" number="4.5.6">
+<h3><span class="header-section-number">4.5.6</span> Save Scripts<a href="troubleshooting-and-tips.html#save-scripts" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><p><strong>Save early and often while coding</strong>. Write reproducible code and structure your workflow in a saved <code>.R</code> script or R Markdown document rather than relying on interactive console commands.</p></li>
+<li><p><strong>Write reproducible pipelines</strong>. Ensure your <code>.R</code> script or R Markdown document contains every step necessary to rebuild your environment from scratch—from loading libraries to reading raw data.</p></li>
+</ul>
+<div class="reflection">
+<p>Consider this! Restarting R will wipe in-memory R objects, but your written code on disk remains completely safe. Having a clean, executable script allows you to re-run your analysis up to your current working step in seconds.</p>
+</div>
+</div>
+<div id="save-files" class="section level3 hasAnchor" number="4.5.7">
+<h3><span class="header-section-number">4.5.7</span> Save Files<a href="troubleshooting-and-tips.html#save-files" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>To avoid re-running time-consuming computational steps (like normalization, alignment, or differential expression testing), consider saving milestone data analysis files to disk:</p>
+<p>Example:</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="troubleshooting-and-tips.html#cb52-1" tabindex="-1"></a><span class="co"># Save filtered counts or results to CSV</span></span>
+<span id="cb52-2"><a href="troubleshooting-and-tips.html#cb52-2" tabindex="-1"></a><span class="fu">write.csv</span>(counts_filtered, <span class="at">file =</span> <span class="st">&quot;counts_filtered.csv&quot;</span>, <span class="at">row.names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb52-3"><a href="troubleshooting-and-tips.html#cb52-3" tabindex="-1"></a></span>
+<span id="cb52-4"><a href="troubleshooting-and-tips.html#cb52-4" tabindex="-1"></a><span class="co"># Reload tabular data</span></span>
+<span id="cb52-5"><a href="troubleshooting-and-tips.html#cb52-5" tabindex="-1"></a>counts_filtered <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;counts_filtered.csv&quot;</span>, <span class="at">row.names =</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="reflection">
+<p>Saving key datasets to disk prevents you from needing to re-run time-consuming upstream pipeline steps every time you restart R to clear model context noise or fix an environment issue.</p>
+</div>
+<p><strong>Note</strong>:</p>
+<p>Plain (e.g. CSV) files cannot store complex internal structures. For S4 classes like DESeqDataSet (dds), save them as .rds files to preserve all design formulas, dispersion estimates, and sample colData intact:</p>
+<p>Example:</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="troubleshooting-and-tips.html#cb53-1" tabindex="-1"></a><span class="co"># Save complex DESeq2&#39;s dds object</span></span>
+<span id="cb53-2"><a href="troubleshooting-and-tips.html#cb53-2" tabindex="-1"></a><span class="fu">saveRDS</span>(dds, <span class="at">file =</span> <span class="st">&quot;dds.rds&quot;</span>)</span>
+<span id="cb53-3"><a href="troubleshooting-and-tips.html#cb53-3" tabindex="-1"></a></span>
+<span id="cb53-4"><a href="troubleshooting-and-tips.html#cb53-4" tabindex="-1"></a><span class="co"># Reload the full S4 object intact after a session reset</span></span>
+<span id="cb53-5"><a href="troubleshooting-and-tips.html#cb53-5" tabindex="-1"></a>dds <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;dds.rds&quot;</span>)</span></code></pre></div>
+</div>
+</div>
+<div id="troubleshooting" class="section level2 hasAnchor" number="4.6">
+<h2><span class="header-section-number">4.6</span> Troubleshooting<a href="troubleshooting-and-tips.html#troubleshooting" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="missing-packages" class="section level3 hasAnchor" number="4.6.1">
+<h3><span class="header-section-number">4.6.1</span> Missing packages<a href="troubleshooting-and-tips.html#missing-packages" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The model may provide code with functions from packages that are not installed, and does not explicitly say that a package is missing.</p>
+<p>If an error indicates a function cannot be found, manually install the missing dependency using standard R and Bioconductor commands:</p>
+<ul>
+<li>For standard packages: <code>install.packages("package_name")</code></li>
+<li>For Bioconductor packages: <code>BiocManager::install("package_name")</code></li>
+</ul>
+</div>
+<div id="gander-errors" class="section level3 hasAnchor" number="4.6.2">
+<h3><span class="header-section-number">4.6.2</span> Gander errors<a href="troubleshooting-and-tips.html#gander-errors" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>When Gander produces unexpected results, errors, or unhelpful code, try these targeted strategies to troubleshoot the interaction:</p>
+<ul>
+<li><strong>Ask again, verbatim</strong>. A second answer may be different.</li>
+<li><strong>Ask the same question using a different prompt</strong> Ask again, but more specifically, (e.g. name the object, the column, and the output format you want.)</li>
+<li><strong>Highlight the error and the code together.</strong> The pairing of the error with error-producing code provides important context.</li>
+<li><strong>Remove context</strong>. Use `chat$chat(“…”) instead of the gander add-in. The difference between using the gander add-in and standard chat is that gander reads your surrounding code and active environment and sends it along with your prompt. Sometimes, a verbally expanded question with no specific context can help instead.</li>
+<li><strong>Add more context</strong>. In the opposite approach, expand gander’s context rather than limit it (e.g., provide additional objects that may be helpful.)</li>
+</ul>
+</div>
+<div id="local-models-limitations" class="section level3 hasAnchor" number="4.6.3">
+<h3><span class="header-section-number">4.6.3</span> Local Models limitations<a href="troubleshooting-and-tips.html#local-models-limitations" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In this RNA-seq workflow (or other complex bioinformatics workflows), you may encounter specific steps where the local model struggles or produces non-functional code, for example:</p>
+<ul>
+<li><strong>Ensembl ID Conversion</strong>: Conversion of Ensembl gene identifiers into common human gene symbols.</li>
+<li><strong>Functional Annotation</strong>: Functional gene annotation such as gene set enrichment analysis.</li>
+<li><strong>Complex S4 Object Manipulation</strong>: Plotting that involves complex bioconductor objects like the <code>dds</code> object with its deeply nested structures.</li>
+</ul>
+<p>Local models also run on limited hardware and smaller paremeter sizes, and you may experience:</p>
+<ul>
+<li><strong>Token Limits &amp; Context Window Exhaustion</strong>: Local models typically have smaller context windows than cloud models. Passing long scripts, large data frame previews, or extensive chat histories can cause the model to forget earlier instructions, truncate code mid-response, or fail entirely.</li>
+</ul>
+<p>Below are some recommended workarounds:</p>
+<div id="use-gander_peek" class="section level4 hasAnchor" number="4.6.3.1">
+<h4><span class="header-section-number">4.6.3.1</span> Use gander_peek()<a href="troubleshooting-and-tips.html#use-gander_peek" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Inspect exactly what context gander sent using gander_peek().
+If the context is missing object structure or truncating necessary details, explicitly ask the model to explain or debug the error message.</p>
+</div>
+<div id="transition-to-a-hosted-api-host-outside-anvil" class="section level4 hasAnchor" number="4.6.3.2">
+<h4><span class="header-section-number">4.6.3.2</span> Transition to a Hosted API Host (Outside AnVIL)<a href="troubleshooting-and-tips.html#transition-to-a-hosted-api-host-outside-anvil" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>When performing more complex bioinformatics tasks, you may encounter specific bottlenecks where local models fall short of frontier cloud models (such as Google Gemini, Anthropic Claude or OpenAI GPT.) In these cases, we recommend transition to a cloud-hosted frontier model outside of AnVIL using <code>ellmer</code> and <code>gander</code>.</p>
+<p><strong>IMPORTANT Data Privacy Reminder:</strong> Using a hosted API path sends your code and data context to external cloud endpoints and requires a private API key. Ensure your dataset is cleared for external transmission before using hosted cloud APIs.</p>
+
+</div>
+</div>
+</div>
+</div>
+<hr>
+<center> 
+  <div class="footer">
+      All illustrations <a href="https://creativecommons.org/licenses/by/4.0/">CC-BY. </a>
+      <br>
+      All other materials <a href= "https://creativecommons.org/licenses/by/4.0/"> CC-BY </a> unless noted otherwise.
+  </div>
+</center>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="run-deseq2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="about-the-authors.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section"
+  }
+});
+});
+</script>
+
+</body>
+
+</html>
