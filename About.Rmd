@@ -11,7 +11,7 @@ These credits are based on our [course contributors table guidelines](https://gi
 |Credits|Names|
 |-------|-----|
 |**Pedagogy**||
-|Lead Content Instructor(s)|[FirstName LastName]|
+|Lead Content Instructor(s)|[Valeriya Gaysinskaya], [Frederick Tan]|
 |Lecturer(s) (include chapter name/link in parentheses if only for specific chapters) - make new line if more than one chapter involved| Delivered the course in some way - video or audio|
 |Content Author(s) (include chapter name/link in parentheses if only for specific chapters) - make new line if more than one chapter involved | If any other authors besides lead instructor| 
 |Content Contributor(s) (include section name/link in parentheses) - make new line if more than one section involved|  Wrote less than a chapter <br><br> AnVIL instructions: [Katherine Cox], [Ava Hoffman], [Elizabeth Humphries]|

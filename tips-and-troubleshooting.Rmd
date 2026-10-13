@@ -1,0 +1,190 @@
+```{r echo = FALSE}
+knitr::opts_chunk$set(out.width = "100%")
+```
+
+# Troubleshooting and Tips {-}
+
+## Tips
+
+### Prompt rule of thumb
+
+**Keep prompts short and concrete**. Rather than *"help me do RNA-seq"* (which is too broad), ask *"Summarize key counts file statistics in a table"* or *"Filter genes with at least 1 count in all samples"*.
+
+**Explicit Prompting**. Break complex prompts into smaller, single-step instructions. Provide explicit input/output structures in your prompt or copy exact code snippets from package vignettes for the model to adapt.
+
+### Minimize Context Noise
+
+Minimize context noise by opening a new `.R` script containing only what the task needs:
+
+**Example**: If you want to ask about the (airway) `counts` dataset, your new `.R` script should contain only the word `counts` corresponding to a loaded object in your RStudio environment. 
+
+Keeping the script lean prevents background code clutter from interfering with gander's responses. A long script sends the assistant a long pile of unrelated code, and the extra context does not help it answer.
+
+### Use gander_peek() Often
+
+Because gander automatically packages your surrounding script, cursor position, and active R environment into a prompt behind the scenes, you might occasionally wonder what exactly it is sending to the model. You can inspect the exact payload using `gander_peek()` right after running your gander add-in.
+
+**What it does**: It returns the underlying ellmer chat object from your most recent interaction as-is. `gander_peek()` will always show you the exact context summary from your immediately preceding request.
+
+**Debugging context**: If a model misunderstands your workspace or gives unexpected code, running `gander_peek()` lets you check whether your data frame structures, package versions, or script snippets were correctly intercepted and passed along.
+
+### Token use awareness
+
+To track your active session's token consumption, in RStudio:
+
+```
+ellmer::token_usage()
+```
+
+**Example 1**: After this interaction with gander
+
+> HIGHLIGHT: counts_filtered
+>
+> PROMPT: Are there any genes with zero counts?
+
+Examine token usage in R Console:
+
+```{r, eval=FALSE}
+> ellmer::token_usage()
+  provider           model input output cached_input price
+1   Ollama qwen3-coder:30b   927     37            0    NA
+```
+
+**Example 2**: After this interaction with gander
+
+> HIGHLIGHT: both, `counts` and `counts_filtered`
+>
+> PROMPT: Summarize counts_filtered and compare to counts
+
+Examine token usage in R Console:
+
+```{r, eval=FALSE}
+> ellmer::token_usage()
+  provider           model input output cached_input price
+1   Ollama qwen3-coder:30b  2278     79            0    NA
+```
+
+Here, the significant jump in input tokens (from 927 to 2,278) is primarily driven by the extra dataset, though the longer prompt and model reasoning overhead also contributed to the increased token count.
+
+### Manage Global Environment Clutter
+
+#### Keep Active Workspace Lean
+
+Periodically,  cleanup unneeded data, or restart your R session entirely to maintain a lean environment:
+
+**Remove specific objects**: 
+
+- Use `rm()` to clean up large temporary variables or obsolete intermediate data frames:
+
+Example: 
+
+```{r, eval=FALSE}
+# Remove temporary variables
+rm(counts_filtered)
+```
+
+**Restart R Session (Nuclear Option)**: 
+
+The most effective way to clear both global environment clutter and gander's internal chat history is a full session restart:
+
+- Keyboard Shortcut: Cmd + Shift + F10 (Mac).
+- RStudio Menu: Go to **Session**, then **Restart R**.
+
+::: {.warning}
+What happens when you restart R?
+
+Restarting R clears all in-memory R objects (e.g. counts, metadata, dds) from the Environment pane and resets gander's active conversation history. However, your saved scripts and files on disk remain 100% safe.
+:::
+
+
+### Save Scripts 
+
+- **Save early and often while coding**. Write reproducible code and structure your workflow in a saved `.R` script or R Markdown document rather than relying on interactive console commands.
+
+- **Write reproducible pipelines**. Ensure your `.R` script or R Markdown document contains every step necessary to rebuild your environment from scratch—from loading libraries to reading raw data.
+
+::: {.reflection}
+Consider this! Restarting R will wipe in-memory R objects, but your written code on disk remains completely safe. Having a clean, executable script allows you to re-run your analysis up to your current working step in seconds.
+::: 
+
+### Save Files
+
+To avoid re-running time-consuming computational steps (like normalization, alignment, or differential expression testing), consider saving milestone data analysis files to disk:
+
+Example:
+
+```{r, eval=FALSE}
+# Save filtered counts or results to CSV
+write.csv(counts_filtered, file = "counts_filtered.csv", row.names = TRUE)
+
+# Reload tabular data
+counts_filtered <- read.csv("counts_filtered.csv", row.names = 1)
+```
+
+::: {.reflection}
+Saving key datasets to disk prevents you from needing to re-run time-consuming upstream pipeline steps every time you restart R to clear model context noise or fix an environment issue.
+:::
+
+**Note**:
+
+Plain (e.g. CSV) files cannot store complex internal structures. For S4 classes like DESeqDataSet (dds), save them as .rds files to preserve all design formulas, dispersion estimates, and sample colData intact:
+
+Example:
+
+```{r, eval=FALSE}
+# Save complex DESeq2's dds object
+saveRDS(dds, file = "dds.rds")
+
+# Reload the full S4 object intact after a session reset
+dds <- readRDS("dds.rds")
+```
+
+## Troubleshooting
+
+### Missing packages
+
+The model may provide code with functions from packages that are not installed, and does not explicitly say that a package is missing.
+
+If an error indicates a function cannot be found, manually install the missing dependency using standard R and Bioconductor commands:
+
+  - For standard packages: `install.packages("package_name")`
+  - For Bioconductor packages: `BiocManager::install("package_name")`
+
+### Gander errors
+
+When Gander produces unexpected results, errors, or unhelpful code, try these targeted strategies to troubleshoot the interaction:
+
+  - **Ask again, verbatim**. A second answer may be different.
+  - **Ask the same question using a different prompt** Ask again, but more specifically, (e.g. name the object, the column, and the output format you want.) 
+  - **Highlight the error and the code together.** The pairing of the error with error-producing code provides important context.
+  - **Remove context**. Use `chat$chat(“...”) instead of the gander add-in. The difference between using the gander add-in and standard chat is that gander reads your surrounding code and active environment and sends it along with your prompt. Sometimes, a verbally expanded question with no specific context can help instead.
+  - **Add more context**. In the opposite approach, expand gander’s context rather than limit it (e.g., provide additional objects that may be helpful.)
+
+### Local Models limitations
+
+In this RNA-seq workflow (or other complex bioinformatics workflows), you may encounter specific steps where the local model struggles or produces non-functional code, for example:
+
+  - **Ensembl ID Conversion**: Conversion of Ensembl gene identifiers into common human gene symbols.
+  - **Functional Annotation**: Functional gene annotation such as gene set enrichment analysis.
+  - **Complex S4 Object Manipulation**: Plotting that involves complex bioconductor objects like the `dds` object with its deeply nested structures.
+
+Local models also run on limited hardware and smaller paremeter sizes, and you may experience:
+
+  - **Token Limits & Context Window Exhaustion**: Local models typically have smaller context windows than cloud models. Passing long scripts, large data frame previews, or extensive chat histories can cause the model to forget earlier instructions, truncate code mid-response, or fail entirely.
+
+Below are some recommended workarounds:
+
+#### Use gander_peek()
+
+Inspect exactly what context gander sent using gander_peek(). 
+If the context is missing object structure or truncating necessary details, explicitly ask the model to explain or debug the error message.
+
+
+#### Transition to a Hosted API Host (Outside AnVIL)
+
+When performing more complex bioinformatics tasks, you may encounter specific bottlenecks where local models fall short of frontier cloud models (such as Google Gemini, Anthropic Claude or OpenAI GPT.) In these cases, we recommend transition to a cloud-hosted frontier model outside of AnVIL using `ellmer` and `gander`.
+
+**IMPORTANT Data Privacy Reminder:** Using a hosted API path sends your code and data context to external cloud endpoints and requires a private API key. Ensure your dataset is cleared for external transmission before using hosted cloud APIs.
+
+
+
