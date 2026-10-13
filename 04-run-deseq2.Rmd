@@ -120,6 +120,8 @@ results %>%
   head()
 ```
 
+Running the code above gives this:
+
 ```{r, fig.align='center', out.width="100%", echo = FALSE}
 ottrpal::include_slide("https://docs.google.com/presentation/d/1zrqf2fLtglxi5l1qx5GCaRlDkKR8ZFp-ldmlqtqWGZg/edit?slide=id.h324ef5e179219b9e_0_59#slide=id.h324ef5e179219b9e_0_59")
 ```
@@ -137,6 +139,7 @@ In a clean R Script:
 ```{r, eval=FALSE}
 results[order(results$pvalue), ]
 ```
+Running the code above gives this:
 
 ```{r, fig.align='center', out.width="100%", echo = FALSE}
 ottrpal::include_slide("https://docs.google.com/presentation/d/1zrqf2fLtglxi5l1qx5GCaRlDkKR8ZFp-ldmlqtqWGZg/edit?slide=id.h324ef5e179219b9e_0_66#slide=id.h324ef5e179219b9e_0_66")
@@ -152,10 +155,11 @@ In a clean R Script:
 
 ***sample gander output***:
 
-
 ```{r, eval=FALSE}
 summary(results)
 ```
+
+Running the code above gives this:
 
 ```{r, fig.align='center', out.width="100%", echo = FALSE}
 ottrpal::include_slide("https://docs.google.com/presentation/d/1zrqf2fLtglxi5l1qx5GCaRlDkKR8ZFp-ldmlqtqWGZg/edit?slide=id.h324ef5e179219b9e_0_72#slide=id.h324ef5e179219b9e_0_72")
@@ -211,14 +215,12 @@ filtered_results <- results[results$padj < 0.05, ]
 ```
 
 ::: {.warning}
-ERROR!
+ERROR! When running code above, `filtered_results <- results[results$padj < 0.05, ]`, there is an error: *Error: logical subscript contains NAs.*
 :::
 
 2. Troubleshoot an error
 
-When running code above, `filtered_results <- results[results$padj < 0.05, ]`, there is an error: *Error: logical subscript contains NAs.*
-
-To troubleshoot this error, highlight both, the code and the error message and feed both to gander:
+To troubleshoot error above, highlight both, the code and the error message and feed both to gander:
 
 ```{r, fig.align='center', out.width="100%", echo = FALSE}
 ottrpal::include_slide("https://docs.google.com/presentation/d/1zrqf2fLtglxi5l1qx5GCaRlDkKR8ZFp-ldmlqtqWGZg/edit?slide=id.h324ef5e179219b9e_0_93#slide=id.h324ef5e179219b9e_0_93")
@@ -228,6 +230,7 @@ ottrpal::include_slide("https://docs.google.com/presentation/d/1zrqf2fLtglxi5l1q
 ```{r, eval=FALSE}
 filtered_results <- results[!is.na(results$padj)&results$padj < 0.05, ]
 ```
+The code is now fixed and will not produce an error.
 
 ## Visualize plots and save results
 
@@ -250,11 +253,13 @@ dev.copy(png, "ma_plot.png", width=600, height=600)
 dev.off()
 ```
 
+Running the code above gives this:
+
 ```{r, fig.align='center', out.width="100%", echo = FALSE}
 ottrpal::include_slide("https://docs.google.com/presentation/d/1zrqf2fLtglxi5l1qx5GCaRlDkKR8ZFp-ldmlqtqWGZg/edit?slide=id.h324ef5e179219b9e_0_88#slide=id.h324ef5e179219b9e_0_88")
 ```
 
---- or, AI may also choose to build an MA plot using ggplot2: 
+Or, AI may also choose to build an MA plot using ggplot2: 
 
 ```{r, eval=FALSE}
 library(ggplot2)
@@ -269,13 +274,15 @@ ggplot(results_df, aes(x = baseMean, y = log2FoldChange, color = significant)) +
   scale_color_manual(values = c("FALSE" = "black", "TRUE" = "red"))
 ```
 
+Running the code above gives this:
+
 ```{r, fig.align='center', out.width="100%", echo = FALSE}
 ottrpal::include_slide("https://docs.google.com/presentation/d/1zrqf2fLtglxi5l1qx5GCaRlDkKR8ZFp-ldmlqtqWGZg/edit?slide=id.h324ef5e179219b9e_0_77#slide=id.h324ef5e179219b9e_0_77")
 ```
 
 ### Visualize a volcano plot
 
-1. Creates a volcano plot to visualize differential gene expression.
+1. Create a volcano plot to visualize differential gene expression.
 
 In a clean R Script: 
 
@@ -300,6 +307,8 @@ ggplot(results_df, aes(x = log2FoldChange, y = -log10(padj))) +
   labs(title = "Volcano Plot", x = "Log2 Fold Change", y = "-Log10 Adjusted P-value") +
   theme_minimal()
 ```
+
+Running the code above gives this:
 
 ```{r, fig.align='center', out.width="100%", echo = FALSE}
 ottrpal::include_slide("https://docs.google.com/presentation/d/1zrqf2fLtglxi5l1qx5GCaRlDkKR8ZFp-ldmlqtqWGZg/edit?slide=id.h324ef5e179219b9e_0_83#slide=id.h324ef5e179219b9e_0_83")
