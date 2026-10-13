@@ -36,4 +36,15 @@ explore-counts-file-with-gander-and-tidyverse
 explore-metadata-file-with-gander-and-tidyverse
 quiz-4
 run-deseq2
+learning-objectives-3
+filter-low-counts
+install-and-load-required-packages-3
+filter-genes-with-low-counts
+run-differential-expression-analysis-with-deseq2
+run-deseq2-on-filtered-counts
+inspect-and-summarize-results
+filter-results-based-on-padj-value
+visualize-plots-and-save-results
+visualize-an-ma-plot
+visualize-a-volcano-plot
 references
