@@ -22,7 +22,7 @@
 
 
 
-<meta name="date" content="2026-10-12" />
+<meta name="date" content="2026-10-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -214,7 +214,26 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.5.4" data-path="explore-data-with-gander.html"><a href="explore-data-with-gander.html#quiz-4"><i class="fa fa-check"></i><b>3.5.4</b> Quiz</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="run-deseq2.html"><a href="run-deseq2.html"><i class="fa fa-check"></i><b>4</b> Run DESeq2</a></li>
+<li class="chapter" data-level="4" data-path="run-deseq2.html"><a href="run-deseq2.html"><i class="fa fa-check"></i><b>4</b> Run DESeq2</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="run-deseq2.html"><a href="run-deseq2.html#learning-objectives-3"><i class="fa fa-check"></i><b>4.1</b> Learning objectives</a></li>
+<li class="chapter" data-level="4.2" data-path="run-deseq2.html"><a href="run-deseq2.html#filter-low-counts"><i class="fa fa-check"></i><b>4.2</b> Filter low counts</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="run-deseq2.html"><a href="run-deseq2.html#install-and-load-required-packages-3"><i class="fa fa-check"></i><b>4.2.1</b> Install and Load Required Packages</a></li>
+<li class="chapter" data-level="4.2.2" data-path="run-deseq2.html"><a href="run-deseq2.html#filter-genes-with-low-counts"><i class="fa fa-check"></i><b>4.2.2</b> Filter genes with low counts</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="run-deseq2.html"><a href="run-deseq2.html#run-differential-expression-analysis-with-deseq2"><i class="fa fa-check"></i><b>4.3</b> Run Differential expression analysis with DEseq2</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="run-deseq2.html"><a href="run-deseq2.html#run-deseq2-on-filtered-counts"><i class="fa fa-check"></i><b>4.3.1</b> Run DESeq2 on filtered counts</a></li>
+<li class="chapter" data-level="4.3.2" data-path="run-deseq2.html"><a href="run-deseq2.html#inspect-and-summarize-results"><i class="fa fa-check"></i><b>4.3.2</b> Inspect and Summarize Results</a></li>
+<li class="chapter" data-level="4.3.3" data-path="run-deseq2.html"><a href="run-deseq2.html#filter-results-based-on-padj-value"><i class="fa fa-check"></i><b>4.3.3</b> Filter results based on padj value</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="run-deseq2.html"><a href="run-deseq2.html#visualize-plots-and-save-results"><i class="fa fa-check"></i><b>4.4</b> Visualize plots and save results</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="run-deseq2.html"><a href="run-deseq2.html#visualize-an-ma-plot"><i class="fa fa-check"></i><b>4.4.1</b> Visualize an MA plot</a></li>
+<li class="chapter" data-level="4.4.2" data-path="run-deseq2.html"><a href="run-deseq2.html#visualize-a-volcano-plot"><i class="fa fa-check"></i><b>4.4.2</b> Visualize a volcano plot</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="about-the-authors.html"><a href="about-the-authors.html"><i class="fa fa-check"></i>About the Authors</a></li>
 <li class="chapter" data-level="5" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>5</b> References</a></li>
 <li class="divider"></li>
@@ -253,7 +272,251 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="run-deseq2" class="section level1 hasAnchor" number="4">
 <h1><span class="header-section-number">Chapter 4</span> Run DESeq2<a href="run-deseq2.html#run-deseq2" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Perform bulk RNA-seq Differential Expression analysis with local AI, gander, and DESeq2</p>
+<p><br></p>
+<div id="learning-objectives-3" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> Learning objectives<a href="run-deseq2.html#learning-objectives-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ol style="list-style-type: decimal">
+<li>Perform pre-filtering on a raw count matrix to optimize performance and visualization</li>
+<li>Execute a standard differential expression analysis using DESeq2</li>
+<li>Explore and visualize results</li>
+</ol>
+</div>
+<div id="filter-low-counts" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> Filter low counts<a href="run-deseq2.html#filter-low-counts" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="install-and-load-required-packages-3" class="section level3 hasAnchor" number="4.2.1">
+<h3><span class="header-section-number">4.2.1</span> Install and Load Required Packages<a href="run-deseq2.html#install-and-load-required-packages-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li>Run the following code in the R Console:</li>
+</ol>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="run-deseq2.html#cb32-1" tabindex="-1"></a><span class="co"># Bioconductor packages</span></span>
+<span id="cb32-2"><a href="run-deseq2.html#cb32-2" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">&quot;DESeq2&quot;</span>)</span>
+<span id="cb32-3"><a href="run-deseq2.html#cb32-3" tabindex="-1"></a><span class="fu">library</span>(DESeq2)</span></code></pre></div>
+</div>
+<div id="filter-genes-with-low-counts" class="section level3 hasAnchor" number="4.2.2">
+<h3><span class="header-section-number">4.2.2</span> Filter genes with low counts<a href="run-deseq2.html#filter-genes-with-low-counts" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Filtering low-count genes before using DESeq2 is optional, but it is a standard practice that helps optimize performance and clean up graphical outputs.
+For example, eliminating genes with few or no reads reduces the memory size of the data object, speeds up count modeling and improves noisiness in visual representations.</p>
+<ol style="list-style-type: decimal">
+<li>Retain genes with a total count of at least 1 across all samples.</li>
+</ol>
+<p>In a clean R Script:</p>
+<blockquote>
+<p><strong>HIGHLIGHT</strong>: <code>counts</code></p>
+<p><strong>PROMPT</strong>: Filter genes with ≥ 1 counts in all samples and create a new filtered counts object</p>
+</blockquote>
+<p><strong><em>sample gander output</em></strong>:</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="run-deseq2.html#cb33-1" tabindex="-1"></a>counts_filtered <span class="ot">&lt;-</span> counts[<span class="fu">rowSums</span>(counts <span class="sc">&gt;=</span> <span class="dv">1</span>) <span class="sc">==</span> <span class="fu">ncol</span>(counts), ]</span></code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li>Check for presence of zero counts</li>
+</ol>
+<p>In a clean R Script:</p>
+<blockquote>
+<p><strong>HIGHLIGHT</strong>: <code>counts_filtered</code></p>
+<p><strong>PROMPT</strong>: Are there any genes with zero counts?</p>
+</blockquote>
+<p><strong><em>sample gander output</em></strong>:</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="run-deseq2.html#cb34-1" tabindex="-1"></a><span class="fu">any</span>(<span class="fu">colSums</span>(counts_filtered <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">&gt;</span> <span class="dv">0</span>)</span></code></pre></div>
+<ol start="3" style="list-style-type: decimal">
+<li>Compare counts to filtered counts</li>
+</ol>
+<blockquote>
+<p><strong>HIGHLIGHT</strong>: both, <code>counts</code> and <code>counts_filtered</code></p>
+<p><strong>PROMPT</strong>: Summarize counts_filtered and compare to counts</p>
+</blockquote>
+<p><img src="04-run-deseq2_files/figure-html/1zrqf2fLtglxi5l1qx5GCaRlDkKR8ZFp-ldmlqtqWGZg_h324ef5e179219b9e_0_52.png" width="100%" style="display: block; margin: auto;" /></p>
+<p><strong><em>sample gander output</em></strong>:</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="run-deseq2.html#cb35-1" tabindex="-1"></a><span class="fu">summary</span>(counts_filtered)</span>
+<span id="cb35-2"><a href="run-deseq2.html#cb35-2" tabindex="-1"></a><span class="fu">summary</span>(counts)</span></code></pre></div>
+</div>
+</div>
+<div id="run-differential-expression-analysis-with-deseq2" class="section level2 hasAnchor" number="4.3">
+<h2><span class="header-section-number">4.3</span> Run Differential expression analysis with DEseq2<a href="run-deseq2.html#run-differential-expression-analysis-with-deseq2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="run-deseq2-on-filtered-counts" class="section level3 hasAnchor" number="4.3.1">
+<h3><span class="header-section-number">4.3.1</span> Run DESeq2 on filtered counts<a href="run-deseq2.html#run-deseq2-on-filtered-counts" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li>In a clean R Script:</li>
+</ol>
+<blockquote>
+<p><strong>HIGHLIGHT</strong>: both, <code>counts_filtered</code> and <code>metadata</code></p>
+<p><strong>PROMPT</strong>: Perform differential expression with filtered counts using DESeq2 and <code>dex</code> as the design condition then save the results as a new object.</p>
+</blockquote>
+<p>We recommend highlighting both objects, the filtered counts, and the metadata, for gander to peek at both to understand the full analysis context. Note that output names like counts_filtered can vary.</p>
+<p><strong><em>sample gander output</em></strong>:</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="run-deseq2.html#cb36-1" tabindex="-1"></a><span class="fu">library</span>(DESeq2)</span>
+<span id="cb36-2"><a href="run-deseq2.html#cb36-2" tabindex="-1"></a></span>
+<span id="cb36-3"><a href="run-deseq2.html#cb36-3" tabindex="-1"></a>dds <span class="ot">&lt;-</span> <span class="fu">DESeqDataSetFromMatrix</span>(<span class="at">countData =</span> counts_filtered,</span>
+<span id="cb36-4"><a href="run-deseq2.html#cb36-4" tabindex="-1"></a>                              <span class="at">colData =</span> metadata,</span>
+<span id="cb36-5"><a href="run-deseq2.html#cb36-5" tabindex="-1"></a>                              <span class="at">design =</span> <span class="sc">~</span> dex)</span>
+<span id="cb36-6"><a href="run-deseq2.html#cb36-6" tabindex="-1"></a></span>
+<span id="cb36-7"><a href="run-deseq2.html#cb36-7" tabindex="-1"></a>dds <span class="ot">&lt;-</span> <span class="fu">DESeq</span>(dds)</span>
+<span id="cb36-8"><a href="run-deseq2.html#cb36-8" tabindex="-1"></a></span>
+<span id="cb36-9"><a href="run-deseq2.html#cb36-9" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">results</span>(dds, <span class="at">contrast =</span> <span class="fu">c</span>(<span class="st">&quot;dex&quot;</span>, <span class="st">&quot;trt&quot;</span>, <span class="st">&quot;untrt&quot;</span>))</span></code></pre></div>
+</div>
+<div id="inspect-and-summarize-results" class="section level3 hasAnchor" number="4.3.2">
+<h3><span class="header-section-number">4.3.2</span> Inspect and Summarize Results<a href="run-deseq2.html#inspect-and-summarize-results" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li>View results. In a clean R Script:</li>
+</ol>
+<blockquote>
+<p><strong>HIGHLIGHT</strong>: <code>results</code></p>
+<p><strong>PROMPT</strong>: View results table</p>
+</blockquote>
+<p><strong><em>sample gander output</em></strong>:</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="run-deseq2.html#cb37-1" tabindex="-1"></a>results <span class="sc">%&gt;%</span></span>
+<span id="cb37-2"><a href="run-deseq2.html#cb37-2" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb37-3"><a href="run-deseq2.html#cb37-3" tabindex="-1"></a>  <span class="fu">rownames_to_column</span>(<span class="at">var =</span> <span class="st">&quot;gene&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb37-4"><a href="run-deseq2.html#cb37-4" tabindex="-1"></a>  <span class="fu">head</span>()</span></code></pre></div>
+<p>Running the code above gives this:</p>
+<p><img src="04-run-deseq2_files/figure-html/1zrqf2fLtglxi5l1qx5GCaRlDkKR8ZFp-ldmlqtqWGZg_h324ef5e179219b9e_0_59.png" width="100%" style="display: block; margin: auto;" /></p>
+<ol start="2" style="list-style-type: decimal">
+<li>Order results by p-value.</li>
+</ol>
+<p>In a clean R Script:</p>
+<blockquote>
+<p><strong>HIGHLIGHT</strong>: <code>results</code></p>
+<p><strong>PROMPT</strong>: View results table</p>
+</blockquote>
+<p><strong><em>sample gander output</em></strong>:</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="run-deseq2.html#cb38-1" tabindex="-1"></a>results[<span class="fu">order</span>(results<span class="sc">$</span>pvalue), ]</span></code></pre></div>
+<p>Running the code above gives this:</p>
+<p><img src="04-run-deseq2_files/figure-html/1zrqf2fLtglxi5l1qx5GCaRlDkKR8ZFp-ldmlqtqWGZg_h324ef5e179219b9e_0_66.png" width="100%" style="display: block; margin: auto;" /></p>
+<ol start="3" style="list-style-type: decimal">
+<li>Summarize results.</li>
+</ol>
+<p>In a clean R Script:</p>
+<blockquote>
+<p><strong>HIGHLIGHT</strong>: <code>results</code></p>
+<p><strong>PROMPT</strong>: Summarize results</p>
+</blockquote>
+<p><strong><em>sample gander output</em></strong>:</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="run-deseq2.html#cb39-1" tabindex="-1"></a><span class="fu">summary</span>(results)</span></code></pre></div>
+<p>Running the code above gives this:</p>
+<p><img src="04-run-deseq2_files/figure-html/1zrqf2fLtglxi5l1qx5GCaRlDkKR8ZFp-ldmlqtqWGZg_h324ef5e179219b9e_0_72.png" width="100%" style="display: block; margin: auto;" /></p>
+<ol start="4" style="list-style-type: decimal">
+<li>Count genes passing a significance threshold</li>
+</ol>
+<p>In a clean R Script:</p>
+<blockquote>
+<p><strong>HIGHLIGHT</strong>: <code>results</code></p>
+<p><strong>PROMPT</strong>: How many genes have padj &lt; 0.05?</p>
+</blockquote>
+<p><strong><em>sample gander output</em></strong>:</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="run-deseq2.html#cb40-1" tabindex="-1"></a><span class="fu">sum</span>(results<span class="sc">$</span>padj <span class="sc">&lt;</span> <span class="fl">0.05</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<ol start="5" style="list-style-type: decimal">
+<li>View top 10 significant genes</li>
+</ol>
+<p>In a clean R Script:</p>
+<blockquote>
+<p><strong>HIGHLIGHT</strong>: <code>results</code></p>
+<p><strong>PROMPT</strong>: View top 10 significant upregulated genes based on padj</p>
+</blockquote>
+<p><strong><em>sample gander output</em></strong>:</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="run-deseq2.html#cb41-1" tabindex="-1"></a>results <span class="sc">%&gt;%</span></span>
+<span id="cb41-2"><a href="run-deseq2.html#cb41-2" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb41-3"><a href="run-deseq2.html#cb41-3" tabindex="-1"></a>  <span class="fu">filter</span>(padj <span class="sc">&lt;</span> <span class="fl">0.05</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb41-4"><a href="run-deseq2.html#cb41-4" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(log2FoldChange)) <span class="sc">%&gt;%</span></span>
+<span id="cb41-5"><a href="run-deseq2.html#cb41-5" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb41-6"><a href="run-deseq2.html#cb41-6" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">c</span>(<span class="st">&quot;log2FoldChange&quot;</span>, <span class="st">&quot;padj&quot;</span>))</span></code></pre></div>
+</div>
+<div id="filter-results-based-on-padj-value" class="section level3 hasAnchor" number="4.3.3">
+<h3><span class="header-section-number">4.3.3</span> Filter results based on padj value<a href="run-deseq2.html#filter-results-based-on-padj-value" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li>Filter to keep only statistically significant results based on a modified adjusted p-value threshold.</li>
+</ol>
+<p>In a clean R Script:</p>
+<blockquote>
+<p><strong>HIGHLIGHT</strong>: <code>results</code></p>
+<p><strong>PROMPT</strong>: Filter results based on cutoff padj &lt; 0.05 and save as a new filtered-results object</p>
+</blockquote>
+<p><strong><em>sample gander output</em></strong>:</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="run-deseq2.html#cb42-1" tabindex="-1"></a>filtered_results <span class="ot">&lt;-</span> results[results<span class="sc">$</span>padj <span class="sc">&lt;</span> <span class="fl">0.05</span>, ]</span></code></pre></div>
+<div class="warning">
+<p>ERROR! When running code above, <code>filtered_results &lt;- results[results$padj &lt; 0.05, ]</code>, there is an error: <em>Error: logical subscript contains NAs.</em></p>
+</div>
+<ol start="2" style="list-style-type: decimal">
+<li>Troubleshoot an error</li>
+</ol>
+<p>To troubleshoot error above, highlight both, the code and the error message and feed both to gander:</p>
+<p><img src="04-run-deseq2_files/figure-html/1zrqf2fLtglxi5l1qx5GCaRlDkKR8ZFp-ldmlqtqWGZg_h324ef5e179219b9e_0_93.png" width="100%" style="display: block; margin: auto;" />
+<strong><em>sample gander output</em></strong>:</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="run-deseq2.html#cb43-1" tabindex="-1"></a>filtered_results <span class="ot">&lt;-</span> results[<span class="sc">!</span><span class="fu">is.na</span>(results<span class="sc">$</span>padj)<span class="sc">&amp;</span>results<span class="sc">$</span>padj <span class="sc">&lt;</span> <span class="fl">0.05</span>, ]</span></code></pre></div>
+<p>The code is now fixed and will not produce an error.</p>
+</div>
+</div>
+<div id="visualize-plots-and-save-results" class="section level2 hasAnchor" number="4.4">
+<h2><span class="header-section-number">4.4</span> Visualize plots and save results<a href="run-deseq2.html#visualize-plots-and-save-results" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="visualize-an-ma-plot" class="section level3 hasAnchor" number="4.4.1">
+<h3><span class="header-section-number">4.4.1</span> Visualize an MA plot<a href="run-deseq2.html#visualize-an-ma-plot" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li>Generate and saves an MA plot to visualize differential gene expression data.</li>
+</ol>
+<p>In a clean R Script:</p>
+<blockquote>
+<p><strong>HIGHLIGHT</strong>: <code>results</code></p>
+<p><strong>PROMPT</strong>: Use DESeq2 to create an MA plot. Save the plot.</p>
+</blockquote>
+<p><strong><em>sample gander output</em></strong>:</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="run-deseq2.html#cb44-1" tabindex="-1"></a><span class="fu">library</span>(DESeq2)</span>
+<span id="cb44-2"><a href="run-deseq2.html#cb44-2" tabindex="-1"></a><span class="fu">plotMA</span>(results, <span class="at">alpha=</span><span class="fl">0.1</span>, <span class="at">ylim=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">3</span>,<span class="dv">3</span>))</span>
+<span id="cb44-3"><a href="run-deseq2.html#cb44-3" tabindex="-1"></a><span class="fu">dev.copy</span>(png, <span class="st">&quot;ma_plot.png&quot;</span>, <span class="at">width=</span><span class="dv">600</span>, <span class="at">height=</span><span class="dv">600</span>)</span>
+<span id="cb44-4"><a href="run-deseq2.html#cb44-4" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code></pre></div>
+<p>Running the code above gives this:</p>
+<p><img src="04-run-deseq2_files/figure-html/1zrqf2fLtglxi5l1qx5GCaRlDkKR8ZFp-ldmlqtqWGZg_h324ef5e179219b9e_0_88.png" width="100%" style="display: block; margin: auto;" /></p>
+<p>Or, AI may also choose to build an MA plot using ggplot2:</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="run-deseq2.html#cb45-1" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb45-2"><a href="run-deseq2.html#cb45-2" tabindex="-1"></a>results_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(results)</span>
+<span id="cb45-3"><a href="run-deseq2.html#cb45-3" tabindex="-1"></a>results_df<span class="sc">$</span>significant<span class="ot">&lt;-</span>results_df<span class="sc">$</span>padj <span class="sc">&lt;</span> <span class="fl">0.05</span></span>
+<span id="cb45-4"><a href="run-deseq2.html#cb45-4" tabindex="-1"></a><span class="fu">ggplot</span>(results_df, <span class="fu">aes</span>(<span class="at">x =</span> baseMean, <span class="at">y =</span> log2FoldChange, <span class="at">color =</span> significant)) <span class="sc">+</span></span>
+<span id="cb45-5"><a href="run-deseq2.html#cb45-5" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb45-6"><a href="run-deseq2.html#cb45-6" tabindex="-1"></a>  <span class="fu">scale_x_log10</span>() <span class="sc">+</span></span>
+<span id="cb45-7"><a href="run-deseq2.html#cb45-7" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="sc">+</span></span>
+<span id="cb45-8"><a href="run-deseq2.html#cb45-8" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;MA Plot&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Mean of normalized counts&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Log2 fold change&quot;</span>) <span class="sc">+</span></span>
+<span id="cb45-9"><a href="run-deseq2.html#cb45-9" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb45-10"><a href="run-deseq2.html#cb45-10" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;FALSE&quot;</span> <span class="ot">=</span> <span class="st">&quot;black&quot;</span>, <span class="st">&quot;TRUE&quot;</span> <span class="ot">=</span> <span class="st">&quot;red&quot;</span>))</span></code></pre></div>
+<p>Running the code above gives this:</p>
+<p><img src="04-run-deseq2_files/figure-html/1zrqf2fLtglxi5l1qx5GCaRlDkKR8ZFp-ldmlqtqWGZg_h324ef5e179219b9e_0_77.png" width="100%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="visualize-a-volcano-plot" class="section level3 hasAnchor" number="4.4.2">
+<h3><span class="header-section-number">4.4.2</span> Visualize a volcano plot<a href="run-deseq2.html#visualize-a-volcano-plot" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li>Create a volcano plot to visualize differential gene expression.</li>
+</ol>
+<p>In a clean R Script:</p>
+<blockquote>
+<p><strong>HIGHLIGHT</strong>: <code>results</code></p>
+<p><strong>PROMPT</strong>: Create a volcano plot</p>
+</blockquote>
+<p><strong><em>sample gander output</em></strong>:</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="run-deseq2.html#cb46-1" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb46-2"><a href="run-deseq2.html#cb46-2" tabindex="-1"></a></span>
+<span id="cb46-3"><a href="run-deseq2.html#cb46-3" tabindex="-1"></a>results_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(results)</span>
+<span id="cb46-4"><a href="run-deseq2.html#cb46-4" tabindex="-1"></a>results_dfsignificant<span class="ot">&lt;-</span><span class="fu">ifelse</span>(results_df<span class="sc">$</span>padj <span class="sc">&lt;</span> <span class="fl">0.05</span> <span class="sc">&amp;</span> <span class="fu">abs</span>(results_df<span class="sc">$</span>log2FoldChange) <span class="sc">&gt;</span> <span class="dv">1</span>, </span>
+<span id="cb46-5"><a href="run-deseq2.html#cb46-5" tabindex="-1"></a>                                 <span class="fu">ifelse</span>(results_df<span class="sc">$</span>log2FoldChange <span class="sc">&gt;</span> <span class="dv">1</span>, <span class="st">&quot;Up&quot;</span>, <span class="st">&quot;Down&quot;</span>), <span class="st">&quot;NotSignificant&quot;</span>)</span>
+<span id="cb46-6"><a href="run-deseq2.html#cb46-6" tabindex="-1"></a></span>
+<span id="cb46-7"><a href="run-deseq2.html#cb46-7" tabindex="-1"></a><span class="fu">ggplot</span>(results_df, <span class="fu">aes</span>(<span class="at">x =</span> log2FoldChange, <span class="at">y =</span> <span class="sc">-</span><span class="fu">log10</span>(padj))) <span class="sc">+</span></span>
+<span id="cb46-8"><a href="run-deseq2.html#cb46-8" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> significant), <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb46-9"><a href="run-deseq2.html#cb46-9" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;Up&quot;</span> <span class="ot">=</span> <span class="st">&quot;red&quot;</span>, <span class="st">&quot;Down&quot;</span> <span class="ot">=</span> <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;NotSignificant&quot;</span> <span class="ot">=</span> <span class="st">&quot;gray&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb46-10"><a href="run-deseq2.html#cb46-10" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="sc">-</span><span class="fu">log10</span>(<span class="fl">0.05</span>), <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="sc">+</span></span>
+<span id="cb46-11"><a href="run-deseq2.html#cb46-11" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>), <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="sc">+</span></span>
+<span id="cb46-12"><a href="run-deseq2.html#cb46-12" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Volcano Plot&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Log2 Fold Change&quot;</span>, <span class="at">y =</span> <span class="st">&quot;-Log10 Adjusted P-value&quot;</span>) <span class="sc">+</span></span>
+<span id="cb46-13"><a href="run-deseq2.html#cb46-13" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<p>Running the code above gives this:</p>
+<p><img src="04-run-deseq2_files/figure-html/1zrqf2fLtglxi5l1qx5GCaRlDkKR8ZFp-ldmlqtqWGZg_h324ef5e179219b9e_0_83.png" width="100%" style="display: block; margin: auto;" /></p>
+<ol start="2" style="list-style-type: decimal">
+<li>Save results as a .csv file</li>
+</ol>
+<p>In a clean R Script:</p>
+<blockquote>
+<p><strong>HIGHLIGHT</strong>: <code>results</code></p>
+<p><strong>PROMPT</strong>: Save results as a csv file</p>
+</blockquote>
+<p><strong><em>sample gander output</em></strong>:</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="run-deseq2.html#cb47-1" tabindex="-1"></a><span class="fu">as.data.frame</span>(results) <span class="sc">%&gt;%</span> <span class="fu">write.csv</span>(<span class="st">&quot;results.csv&quot;</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<p>Note: <code>row.names = TRUE</code> is typically preferred for DESeq2 outputs so that gene identifiers are preserved in the first column of the CSV file).</p>
 
+</div>
+</div>
 </div>
 <hr>
 <center> 
