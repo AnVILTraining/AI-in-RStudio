@@ -99,7 +99,8 @@ Restarting R clears all in-memory R objects (e.g. counts, metadata, dds) from th
 
 ### Save Scripts 
 
-- **Save early and often while coding**. Write reproducible code and structure your workflow in a **saved .R script** or R Markdown document rather than relying on interactive console commands.
+- **Save early and often while coding**. Write reproducible code and structure your workflow in a saved `.R` script or R Markdown document rather than relying on interactive console commands.
+
 - **Write reproducible pipelines**. Ensure your `.R` script or R Markdown document contains every step necessary to rebuild your environment from scratch—from loading libraries to reading raw data.
 
 ::: {.reflection}
@@ -130,12 +131,13 @@ Plain (e.g. CSV) files cannot store complex internal structures. For S4 classes 
 
 Example:
 
-```
+```{r, eval=FALSE}
 # Save complex DESeq2's dds object
 saveRDS(dds, file = "dds.rds")
 
 # Reload the full S4 object intact after a session reset
 dds <- readRDS("dds.rds")
+```
 
 ## Troubleshooting
 
