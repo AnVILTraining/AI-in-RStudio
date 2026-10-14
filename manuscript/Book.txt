@@ -1,5 +1,6 @@
 1-Introduction.md
 2-Run-Local-Models.md
+quiz_ch2.md
 3-Explore-data-with-gander.md
 4-Run-DESeq2.md
 About-this-Book.md
